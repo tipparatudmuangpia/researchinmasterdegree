@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>วิจัยและการใช้หลักฐานเชิงประจักษ์ทางการพยาบาล · 1100500107</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#15212b;
+  --ink-soft:#42505c;
+  --paper:#f6f3ec;
+  --paper-2:#efeae0;
+  --card:#fffdf8;
+  --line:#ddd5c7;
+  --teal:#0f6b6b;
+  --teal-deep:#0a4f4f;
+  --teal-wash:#e3efed;
+  --clay:#c0603a;
+  --clay-wash:#f6e4da;
+  --gold:#c69a3e;
+  --plum:#6b2e5f;
+  --ok:#1f7a52;
+  --ok-wash:#e0f0e5;
+  --no:#b23a48;
+  --no-wash:#f8e2e2;
+  --shadow:0 1px 2px rgba(21,33,43,.06),0 8px 26px rgba(21,33,43,.07);
+  --shadow-lg:0 2px 6px rgba(21,33,43,.08),0 22px 50px rgba(21,33,43,.13);
+  --radius:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"IBM Plex Sans Thai",system-ui,sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+.en{font-family:"IBM Plex Mono",monospace;font-weight:500;letter-spacing:-.01em}
+h1,h2,h3,.display{font-family:"Fraunces",Georgia,serif}
+
+/* ---------- shell ---------- */
+.shell{display:flex;min-height:100vh}
+.rail{
+  width:300px;flex-shrink:0;background:var(--ink);color:#e9e4d8;
+  position:sticky;top:0;height:100vh;overflow-y:auto;
+  padding:26px 0 40px;
+}
+.rail::-webkit-scrollbar{width:8px}
+.rail::-webkit-scrollbar-thumb{background:#33424e;border-radius:8px}
+.rail-head{padding:0 24px 20px;border-bottom:1px solid #2b3742;margin-bottom:14px}
+.rail-code{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.08em;color:var(--gold);text-transform:uppercase}
+.rail-title{font-family:"Fraunces";font-size:21px;font-weight:600;line-height:1.25;margin-top:8px;color:#fff}
+.rail-sub{font-size:12.5px;color:#9aa6 af;color:#9aa6af;margin-top:8px}
+.progress-mini{margin-top:16px;height:6px;background:#2b3742;border-radius:6px;overflow:hidden}
+.progress-mini>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--gold));transition:width .5s}
+.progress-label{font-size:11px;color:#8a97a1;margin-top:7px;letter-spacing:.02em}
+
+.nav-chapter{margin:4px 0}
+.nav-ch-btn{
+  width:100%;text-align:right;background:none;border:none;color:#cdd5da;
+  font-family:inherit;font-size:14.5px;font-weight:600;cursor:pointer;
+  padding:11px 24px;display:flex;align-items:center;gap:11px;justify-content:flex-start;
+  transition:background .15s,color .15s;direction:rtl;
+}
+.nav-ch-btn:hover{background:#222d37;color:#fff}
+.nav-ch-btn .num{
+  font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;
+  width:25px;height:25px;border-radius:7px;background:#2b3742;color:var(--gold);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;direction:ltr;
+}
+.nav-ch-btn.locked{color:#65727c;cursor:default}
+.nav-ch-btn.locked:hover{background:none}
+.nav-ch-btn.locked .num{background:#222d37;color:#5a6770}
+.nav-ch-btn .lockico{margin-right:auto;font-size:12px;opacity:.6;direction:ltr}
+.nav-topics{display:none;padding:2px 24px 8px 24px}
+.nav-chapter.open .nav-topics{display:block}
+.nav-topic{
+  display:flex;align-items:center;gap:9px;direction:rtl;text-align:right;
+  width:100%;background:none;border:none;color:#9aa6af;font-family:inherit;
+  font-size:13px;cursor:pointer;padding:7px 10px 7px 0;border-radius:8px;transition:.15s;
+}
+.nav-topic:hover{color:#fff;background:#222d37}
+.nav-topic.active{color:#fff;background:var(--teal-deep)}
+.nav-topic .dot{width:7px;height:7px;border-radius:50%;background:#42505c;flex-shrink:0}
+.nav-topic.done .dot{background:var(--gold)}
+.nav-topic.active .dot{background:#fff}
+
+/* ---------- main ---------- */
+.main{flex:1;min-width:0}
+.topbar{
+  position:sticky;top:0;z-index:20;background:rgba(246,243,236,.85);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line);
+  padding:14px 40px;display:flex;align-items:center;gap:16px;
+}
+.crumb{font-size:13px;color:var(--ink-soft)}
+.crumb b{color:var(--ink)}
+.topbar .spacer{flex:1}
+.menu-toggle{display:none}
+.view{max-width:920px;margin:0 auto;padding:46px 40px 120px}
+
+/* ---------- hero ---------- */
+.hero{padding:30px 0 10px}
+.hero-eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--clay);font-weight:600}
+.hero h1{font-size:clamp(34px,5vw,52px);font-weight:700;line-height:1.08;margin:18px 0;letter-spacing:-.01em}
+.hero .lede{font-size:18px;color:var(--ink-soft);max-width:640px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.chip{background:var(--card);border:1px solid var(--line);border-radius:100px;padding:7px 15px;font-size:13px;color:var(--ink-soft);box-shadow:var(--shadow)}
+.chip b{color:var(--ink)}
+.hero-cta{margin-top:34px;display:flex;gap:12px;flex-wrap:wrap}
+
+/* chapter cards on home */
+.ch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px;margin-top:14px}
+.ch-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:24px;box-shadow:var(--shadow);cursor:pointer;transition:transform .18s,box-shadow .18s;
+  position:relative;overflow:hidden;text-align:right;display:flex;flex-direction:column;
+}
+.ch-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.ch-card.locked{cursor:default;opacity:.72}
+.ch-card.locked:hover{transform:none;box-shadow:var(--shadow)}
+.ch-card .big-num{font-family:"Fraunces";font-size:46px;font-weight:600;color:var(--teal);line-height:1}
+.ch-card.locked .big-num{color:var(--line)}
+.ch-card h3{font-size:18px;margin:12px 0 8px;font-weight:600;line-height:1.3}
+.ch-card p{font-size:13.5px;color:var(--ink-soft);flex:1}
+.ch-card .foot{margin-top:16px;display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--teal);font-weight:600}
+.ch-card .badge{font-size:11px;padding:4px 10px;border-radius:100px;font-weight:600;display:inline-block}
+.badge-full{background:var(--teal-wash);color:var(--teal-deep)}
+.badge-soon{background:var(--paper-2);color:var(--ink-soft)}
+
+/* ---------- topic view ---------- */
+.topic-head{margin-bottom:8px}
+.topic-kicker{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--clay);font-weight:600;letter-spacing:.04em}
+.topic-head h2{font-size:clamp(26px,3.5vw,38px);font-weight:700;line-height:1.14;margin:10px 0;letter-spacing:-.01em}
+.topic-head .en-sub{font-family:"IBM Plex Mono",monospace;font-size:14px;color:var(--ink-soft);font-weight:500}
+
+/* phase tabs */
+.phases{display:flex;gap:6px;background:var(--paper-2);padding:6px;border-radius:14px;margin:26px 0 8px;position:sticky;top:62px;z-index:15;box-shadow:var(--shadow)}
+.phase-tab{
+  flex:1;border:none;background:none;font-family:inherit;cursor:pointer;
+  padding:11px 8px;border-radius:10px;font-size:14px;font-weight:600;color:var(--ink-soft);
+  display:flex;flex-direction:column;align-items:center;gap:2px;transition:.18s;
+}
+.phase-tab .ph-en{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.05em;opacity:.7;font-weight:500}
+.phase-tab[data-on="1"]{background:var(--card);color:var(--teal-deep);box-shadow:var(--shadow)}
+.phase-tab:hover:not([data-on="1"]){color:var(--ink)}
+
+.phase-panel{display:none;padding-top:22px;animation:fade .35s}
+.phase-panel.show{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* generic content blocks */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px 26px;box-shadow:var(--shadow);margin-bottom:18px}
+.card h4{font-size:18px;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.card h4 .ic{width:30px;height:30px;border-radius:9px;background:var(--teal-wash);color:var(--teal-deep);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.prose p{margin-bottom:12px;color:var(--ink-soft)}
+.prose strong{color:var(--ink);font-weight:600}
+.lead-in{font-size:16.5px;color:var(--ink-soft);margin-bottom:22px;max-width:680px}
+
+/* objective box */
+.obj-box{background:linear-gradient(135deg,var(--teal-deep),var(--teal));color:#eafaf6;border-radius:var(--radius);padding:26px 28px;margin-bottom:8px;box-shadow:var(--shadow)}
+.obj-box .label{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#9fe3d4;font-weight:600}
+.obj-box h4{font-family:"Fraunces";font-size:21px;margin:8px 0 16px;color:#fff}
+.obj-list{list-style:none;display:flex;flex-direction:column;gap:12px}
+.obj-list li{display:flex;gap:12px;align-items:flex-start;font-size:15px}
+.obj-list .llo{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;background:rgba(255,255,255,.16);padding:3px 9px;border-radius:7px;flex-shrink:0;margin-top:3px;letter-spacing:.02em}
+.obj-target{margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,.2);font-size:14px;color:#cdeee6}
+.obj-target b{color:#fff}
+
+/* warmup / activate prior knowledge */
+.warm{background:var(--clay-wash);border:1px solid #e9cbbb;border-radius:var(--radius);padding:24px 26px;margin-bottom:18px}
+.warm .tag{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--clay);font-weight:600}
+.warm h4{font-size:18px;margin:6px 0 14px;font-family:"Fraunces";color:var(--ink)}
+.warm-q{background:var(--card);border-radius:12px;padding:15px 18px;margin-bottom:10px;font-size:14.5px;cursor:pointer;border:1px solid transparent;transition:.18s}
+.warm-q:hover{border-color:var(--clay)}
+.warm-q .qrow{display:flex;gap:10px;align-items:flex-start}
+.warm-q .qmark{color:var(--clay);font-weight:700;flex-shrink:0}
+.warm-q .reveal{display:none;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);font-size:13.5px;color:var(--ink-soft)}
+.warm-q.open .reveal{display:block;animation:fade .25s}
+.warm-q .hint{font-size:11px;color:var(--clay);margin-top:8px;font-weight:600}
+
+/* roadmap */
+.roadmap{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0 22px}
+.rm-step{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:9px 13px;font-size:12.5px;text-align:center;min-width:78px;box-shadow:var(--shadow)}
+.rm-step .n{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-soft)}
+.rm-step .t{font-weight:600;font-size:12.5px}
+.rm-step.on{background:var(--teal-deep);border-color:var(--teal-deep);color:#fff}
+.rm-step.on .n{color:#9fe3d4}
+.rm-arrow{color:var(--line);font-size:16px}
+
+/* tables */
+.tbl-wrap{overflow-x:auto;border-radius:14px;border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:18px}
+table.data{width:100%;border-collapse:collapse;background:var(--card);font-size:13.5px;min-width:520px}
+table.data th{background:var(--teal-deep);color:#fff;font-weight:600;text-align:right;padding:12px 14px;font-size:13px}
+table.data td{padding:11px 14px;border-top:1px solid var(--line);color:var(--ink-soft);vertical-align:top}
+table.data tr:nth-child(even) td{background:var(--paper)}
+table.data td b,table.data td strong{color:var(--ink)}
+.mono-cell{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--teal-deep);font-weight:600}
+
+/* concept grid */
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-bottom:18px}
+.ccard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow)}
+.ccard .ic{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:11px;background:var(--clay-wash);color:var(--clay)}
+.ccard h5{font-size:15px;font-weight:600;margin-bottom:3px}
+.ccard .en-tag{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-soft);margin-bottom:8px;font-weight:500}
+.ccard p{font-size:13px;color:var(--ink-soft)}
+
+/* FINER / acronym strip */
+.acro{display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
+.acro-row{display:flex;gap:14px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:15px 18px;box-shadow:var(--shadow)}
+.acro-letter{font-family:"Fraunces";font-size:30px;font-weight:700;color:var(--teal);line-height:1;width:38px;flex-shrink:0;text-align:center}
+.acro-body h5{font-size:15px;font-weight:600}
+.acro-body .en-tag{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-soft);font-weight:500}
+.acro-body p{font-size:13px;color:var(--ink-soft);margin-top:4px}
+
+/* callout */
+.callout{border-radius:14px;padding:16px 20px;margin-bottom:18px;font-size:14px;display:flex;gap:13px;align-items:flex-start}
+.callout .cic{font-size:18px;flex-shrink:0;line-height:1.4}
+.callout.tip{background:var(--teal-wash);border:1px solid #bcdbd4;color:var(--teal-deep)}
+.callout.warn{background:var(--clay-wash);border:1px solid #e9cbbb;color:#8a3d1f}
+.callout.gold{background:#f7eed4;border:1px solid #e6d29a;color:#7a5e1c}
+.callout b{font-weight:700}
+
+/* alignment chain */
+.chain{display:flex;flex-direction:column;gap:0;margin-bottom:18px}
+.chain-node{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:15px 18px;box-shadow:var(--shadow)}
+.chain-node .lab{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--clay);font-weight:600;margin-bottom:5px}
+.chain-node p{font-size:14px;color:var(--ink-soft)}
+.chain-arrow{text-align:center;color:var(--teal);font-size:20px;padding:5px 0;font-weight:700}
+
+/* archery / target visual */
+.targets{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-bottom:18px}
+.tg{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center;box-shadow:var(--shadow)}
+.tg svg{width:84px;height:84px;margin-bottom:8px}
+.tg h5{font-size:14px;font-weight:600;margin-bottom:4px}
+.tg p{font-size:12px;color:var(--ink-soft)}
+
+/* ---------- quiz ---------- */
+.quiz-intro{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow);margin-bottom:18px;text-align:center}
+.quiz-intro h4{font-family:"Fraunces";font-size:22px;justify-content:center;margin-bottom:8px}
+.quiz-intro p{color:var(--ink-soft);font-size:14.5px;max-width:520px;margin:0 auto 18px}
+.q-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px 26px;box-shadow:var(--shadow);margin-bottom:16px}
+.q-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.q-count{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--clay);font-weight:600;letter-spacing:.04em}
+.q-tag{font-size:11px;background:var(--paper-2);color:var(--ink-soft);padding:4px 11px;border-radius:100px;font-weight:600}
+.q-stem{font-size:16.5px;font-weight:600;margin:8px 0 18px;line-height:1.55}
+.opt{display:block;width:100%;text-align:right;background:var(--paper);border:1.5px solid var(--line);border-radius:12px;
+  padding:14px 18px;margin-bottom:10px;font-family:inherit;font-size:14.5px;cursor:pointer;transition:.15s;color:var(--ink);position:relative}
+.opt:hover:not(:disabled){border-color:var(--teal);background:var(--teal-wash)}
+.opt:disabled{cursor:default}
+.opt .olbl{font-family:"IBM Plex Mono",monospace;font-weight:600;color:var(--teal-deep);margin-left:8px}
+.opt.correct{background:var(--ok-wash);border-color:var(--ok);color:#0e4d31}
+.opt.correct .olbl{color:var(--ok)}
+.opt.wrong{background:var(--no-wash);border-color:var(--no);color:#7a2630}
+.opt.wrong .olbl{color:var(--no)}
+.opt .mark{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-weight:700;font-size:16px}
+.explain{display:none;margin-top:6px;border-radius:12px;padding:16px 18px;font-size:14px;line-height:1.6;animation:fade .3s}
+.explain.show{display:block}
+.explain.right{background:var(--ok-wash);border:1px solid #b4ddc4}
+.explain.righ t,.explain.right b{color:#0e4d31}
+.explain.miss{background:#fdf4e3;border:1px solid #ecd9a8}
+.explain .etag{font-weight:700;margin-bottom:5px;display:flex;align-items:center;gap:7px}
+.explain.right .etag{color:var(--ok)}
+.explain.miss .etag{color:#9a7414}
+.explain .lloref{font-family:"IBM Plex Mono",monospace;font-size:11px;background:rgba(0,0,0,.05);padding:2px 8px;border-radius:6px;margin-top:9px;display:inline-block;color:var(--ink-soft)}
+
+.btn{font-family:inherit;font-weight:600;font-size:14.5px;border:none;border-radius:12px;padding:13px 24px;cursor:pointer;transition:.18s;display:inline-flex;align-items:center;gap:8px}
+.btn-primary{background:var(--teal-deep);color:#fff;box-shadow:var(--shadow)}
+.btn-primary:hover{background:var(--teal);transform:translateY(-1px)}
+.btn-ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal-deep)}
+.btn:disabled{opacity:.4;cursor:default;transform:none}
+.q-nav{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+
+/* quiz result */
+.result{background:linear-gradient(135deg,var(--teal-deep),var(--teal));color:#fff;border-radius:var(--radius);padding:36px;text-align:center;box-shadow:var(--shadow-lg);margin-bottom:18px}
+.result .score-ring{width:130px;height:130px;margin:0 auto 16px}
+.result h3{font-family:"Fraunces";font-size:26px;margin-bottom:6px;color:#fff}
+.result p{color:#cdeee6;font-size:15px;max-width:460px;margin:0 auto}
+.result .pct{font-family:"Fraunces";font-size:40px;font-weight:700}
+.breakdown{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.bd{background:rgba(255,255,255,.14);border-radius:12px;padding:12px 18px;font-size:13px}
+.bd b{display:block;font-family:"Fraunces";font-size:22px}
+
+/* assignment bridge */
+.bridge{background:#f7eed4;border:1px solid #e6d29a;border-radius:var(--radius);padding:24px 26px;margin-bottom:18px}
+.bridge .tag{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#9a7414;font-weight:600}
+.bridge h4{font-family:"Fraunces";font-size:19px;margin:6px 0 12px;color:var(--ink)}
+.bridge ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.bridge li{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--ink-soft)}
+.bridge li .ck{color:var(--gold);font-weight:700;flex-shrink:0}
+
+/* locked chapter view */
+.locked-view{text-align:center;padding:70px 20px}
+.locked-view .lic{font-size:46px;margin-bottom:18px;opacity:.4}
+.locked-view h2{font-size:26px;margin-bottom:12px}
+.locked-view p{color:var(--ink-soft);max-width:480px;margin:0 auto 24px}
+.outline-list{max-width:560px;margin:0 auto;text-align:right}
+.outline-item{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-bottom:10px;display:flex;gap:12px;align-items:center;box-shadow:var(--shadow)}
+.outline-item .on{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--teal);font-weight:600;flex-shrink:0}
+.outline-item .ot{font-size:14px;text-align:right;flex:1}
+.outline-item . ob{font-size:11px}
+
+.footer-note{text-align:center;font-size:12.5px;color:var(--ink-soft);margin-top:40px;padding-top:20px;border-top:1px solid var(--line)}
+
+/* responsive */
+@media(max-width:860px){
+  .rail{position:fixed;right:-300px;transition:right .25s;z-index:50;box-shadow:-10px 0 40px rgba(0,0,0,.3)}
+  .rail.open{right:0}
+  .menu-toggle{display:inline-flex;background:var(--ink);color:#fff;border:none;border-radius:10px;width:40px;height:40px;align-items:center;justify-content:center;cursor:pointer;font-size:18px}
+  .view{padding:30px 20px 100px}
+  .topbar{padding:12px 18px}
+  .scrim{position:fixed;inset:0;background:rgba(21,33,43,.45);z-index:40;display:none}
+  .scrim.show{display:block}
+  .phases{top:60px}
+}
+@media(min-width:861px){.menu-toggle{display:none}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="rail" id="rail">
+    <div class="rail-head">
+      <div class="rail-code">1100500107</div>
+      <div class="rail-title">วิจัยและการใช้หลักฐานเชิงประจักษ์ทางการพยาบาล</div>
+      <div class="rail-sub">Research &amp; Evidence-Based Nursing · ป.โท พยาบาลศาสตร์ · ปีการศึกษา 2569</div>
+      <div class="progress-mini"><i id="progBar"></i></div>
+      <div class="progress-label" id="progLabel">ความคืบหน้า 0%</div>
+    </div>
+    <nav id="navTree"></nav>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+
+  <main class="main">
+    <div class="topbar">
+      <button class="menu-toggle" id="menuBtn">☰</button>
+      <div class="crumb" id="crumb"><b>หน้าหลัก</b></div>
+      <div class="spacer"></div>
+      <button class="btn btn-ghost" id="homeBtn" style="padding:8px 16px;font-size:13px">หน้าหลัก</button>
+    </div>
+    <div class="view" id="view"></div>
+  </main>
+</div>
+
+<script>
+/* ============================================================
+   content.js — โครงสร้างเนื้อหาทั้งรายวิชา
+   เนื้อหา interactive เต็มรูปแบบ = บทที่ 2 (ส่วนที่ 1 + 2)
+   บทที่ 1, 3, 4 = โครงร่างตามประมวลรายวิชา (รอเติม)
+   ============================================================ */
+
+const COURSE = {
+  chapters: [
+    /* ---------- บทที่ 1 (โครงร่าง) ---------- */
+    {
+      id: "ch1", num: 1, status: "outline",
+      title: "การวิจัยและนวัตกรรมทางการพยาบาลและจริยธรรมการวิจัย",
+      en: "Nursing Research, Innovation & Research Ethics",
+      teacher: "ผศ.ดร.กมลทิพย์ ตั้งหลักมั่นคง",
+      clo: ["CLO1", "CLO5"],
+      desc: "ความสำคัญและประเภทของการวิจัย นวัตกรรมทางการพยาบาล หลักจริยธรรมการวิจัยในมนุษย์ และจริยธรรมเชิงวิชาการ",
+      outline: [
+        "1.1 ความสำคัญและแนวคิดของการวิจัยทางการพยาบาล",
+        "1.2 ประเภทของการวิจัย",
+        "1.3 นวัตกรรมและการออกแบบ",
+        "1.4 หลักจริยธรรมการวิจัยในมนุษย์",
+        "1.5 หลักจริยธรรมเชิงวิชาการ"
+      ]
+    },
+
+    /* ---------- บทที่ 2 (เต็มรูปแบบ) ---------- */
+    {
+      id: "ch2", num: 2, status: "full",
+      title: "ระเบียบวิธีวิจัยและการเผยแพร่ผลงานวิจัย",
+      en: "Research Methodology & Dissemination",
+      teacher: "ผศ.ดร.ทิพย์รัตน์ อุดเมืองเพีย",
+      clo: ["CLO1", "CLO3", "CLO4", "CLO5"],
+      desc: "หัวใจของรายวิชา — ตั้งแต่การกำหนดปัญหาวิจัย ออกแบบการวิจัย เลือกเครื่องมือ เก็บข้อมูล ไปจนถึงการวิเคราะห์และเผยแพร่ พร้อมบูรณาการ AI อย่างมีจริยธรรม",
+      topics: ["t21","t22","t23","t24","t25","t26","t27","t28","t29"]
+    },
+
+    /* ---------- บทที่ 3 (โครงร่าง) ---------- */
+    {
+      id: "ch3", num: 3, status: "outline",
+      title: "การใช้ผลการวิจัยและหลักฐานเชิงประจักษ์ในการปฏิบัติการพยาบาล",
+      en: "Evidence-Based Practice in Nursing",
+      teacher: "ผศ.ดร.ลักขณา ศิรถิรกุล",
+      clo: ["CLO2", "CLO4"],
+      desc: "หลักการ EBP ขั้นตอนการพัฒนาแนวปฏิบัติทางการพยาบาล การประเมินคุณภาพและความน่าเชื่อถือของหลักฐานเชิงประจักษ์",
+      outline: [
+        "3.1 หลักการและแนวคิดการปฏิบัติตามหลักฐานเชิงประจักษ์",
+        "3.2 ขั้นตอนการพัฒนาแนวปฏิบัติทางการพยาบาลโดยใช้หลักฐานเชิงประจักษ์",
+        "3.3 การเลือกใช้ผลการวิจัยที่มีคุณภาพในการพัฒนาคุณภาพการพยาบาล",
+        "3.4 การประเมินคุณภาพของหลักฐานเชิงประจักษ์"
+      ]
+    },
+
+    /* ---------- บทที่ 4 (โครงร่าง) ---------- */
+    {
+      id: "ch4", num: 4, status: "outline",
+      title: "การนำเสนอโครงร่างการวิจัย",
+      en: "Research Proposal Presentation",
+      teacher: "คณาจารย์ทั้ง 4 สาขาวิชา",
+      clo: ["CLO3", "CLO4", "CLO5"],
+      desc: "นำเสนอและอภิปรายโครงร่างการวิจัย (รายงานฉบับที่ 3) ในประเด็นที่เลือกสรร แบ่งตามกลุ่มสาขาวิชา",
+      outline: [
+        "นำเสนอโครงร่างการวิจัยรายบุคคล (4 กลุ่มสาขาวิชา)",
+        "อภิปรายและให้ข้อเสนอแนะโดยคณาจารย์",
+        "ประเมินจริยธรรมทางวิชาการและการอ้างอิง APA 7"
+      ]
+    }
+  ],
+
+  /* =========================================================
+     เนื้อหารายหัวข้อ บทที่ 2
+     แต่ละหัวข้อมี 3 เฟส: before / during / after(quiz)
+     ========================================================= */
+  topics: {
+
+    /* ---------------- 2.1 ---------------- */
+    t21: {
+      ch: "ch2", code: "2.1",
+      title: "การกำหนดปัญหา วัตถุประสงค์ คำถาม และสมมติฐาน",
+      en: "Research Problem, Objectives, Questions & Hypotheses",
+      llo: ["LLO 1.1", "LLO 1.2"],
+      roadmap: 1,
+      before: {
+        objectives: [
+          { tag:"LLO 1.1", t:"อภิปรายที่มาของปัญหาวิจัยและเกณฑ์ FINER ในการเลือกปัญหาได้" },
+          { tag:"LLO 1.2", t:"วิเคราะห์ความสอดคล้อง (alignment) ระหว่างปัญหา → วัตถุประสงค์ → คำถาม → สมมติฐานได้" }
+        ],
+        target: "นำกรอบ PICO(T) และหลัก FINER ไปกำหนดหัวข้อและวัตถุประสงค์ของ <b>โครงร่างการวิจัย (รายงานฉบับที่ 3)</b>",
+        warmups: [
+          { q:"ก่อนเริ่มบทนี้ ลองนึก: อะไรคือ “ปัญหาวิจัย” ที่ดี ต่างจากปัญหาในการทำงานประจำวันอย่างไร?", a:"ปัญหาวิจัยต้องเป็น <b>ช่องว่างของความรู้ (knowledge gap)</b> ที่ตอบได้ด้วยวิธีการเป็นระบบ ไม่ใช่แค่ปัญหาหน้างานที่แก้ด้วยการบริหารจัดการ — บทนี้จะสอนเกณฑ์ FINER ช่วยกลั่นกรอง" },
+          { q:"ถ้าหัวข้อวิจัยของคุณคือ “ผลของโปรแกรม X ต่อผลลัพธ์ Y ในกลุ่ม Z” — ตัว P I C O คืออะไรบ้าง?", a:"P = กลุ่ม Z, I = โปรแกรม X, C = การดูแลตามปกติ, O = ผลลัพธ์ Y — การแยกองค์ประกอบนี้คือกุญแจสู่การตั้งคำถามและคำค้นในหัวข้อ 2.3" }
+        ]
+      },
+      during: [
+        { type:"lead", t:"ปัญหาวิจัยที่ดีคือรากฐานของทั้งเรื่อง บทนี้พาเดินจากแหล่งที่มาของปัญหา → เกณฑ์คัดเลือก FINER → การเขียน problem statement → กรอบ PICO → จนถึงการตั้งวัตถุประสงค์ คำถาม และสมมติฐานที่สอดคล้องกัน" },
+        { type:"concept-grid", title:"ปัญหาวิจัยมาจากไหน (6 แหล่งที่มา)", items:[
+          { ic:"🏥", h:"การปฏิบัติทางคลินิก", en:"Clinical Practice", p:"ปัญหาหน้างาน เช่น อัตราเลี้ยงลูกด้วยนมแม่ต่ำ ภาวะตกเลือดหลังคลอด" },
+          { ic:"📚", h:"วรรณกรรมและงานวิจัย", en:"Literature Gap", p:"ข้อเสนอแนะท้ายงานวิจัย ผลการศึกษาที่ขัดแย้งกัน ช่องว่างความรู้" },
+          { ic:"🧩", h:"ทฤษฎี", en:"Theory", p:"ทดสอบหรือขยายทฤษฎีทางการพยาบาล เช่น Self-Efficacy, Self-Care" },
+          { ic:"🏛️", h:"นโยบายและลำดับความสำคัญ", en:"Policy & Priorities", p:"ยุทธศาสตร์ชาติ SDGs ปัญหาสุขภาพมารดาทารก ประเด็นวิจัยของแหล่งทุน" },
+          { ic:"💡", h:"เทคโนโลยีและนวัตกรรม", en:"Technology & Innovation", p:"Digital health, mHealth, AI ที่เปลี่ยนรูปแบบการดูแล" },
+          { ic:"👥", h:"ประสบการณ์และผู้มีส่วนได้ส่วนเสีย", en:"Experience & Stakeholders", p:"ข้อมูลจากผู้ป่วย ครอบครัว ทีมสหวิชาชีพ และชุมชน" }
+        ]},
+        { type:"acro", title:"เกณฑ์การเลือกปัญหาวิจัย: FINER", items:[
+          { L:"F", h:"Feasible — ความเป็นไปได้", p:"มีกลุ่มตัวอย่างพอ มีเวลา งบประมาณ เครื่องมือ และความเชี่ยวชาญที่ทำได้จริง" },
+          { L:"I", h:"Interesting — น่าสนใจ", p:"ผู้วิจัยสนใจจริง และอยู่ในความสนใจของวงวิชาการ/วิชาชีพ" },
+          { L:"N", h:"Novel — ความใหม่", p:"ให้ความรู้ใหม่ ยืนยัน/โต้แย้ง หรือต่อยอดผลเดิม ไม่ซ้ำซ้อนโดยไม่จำเป็น" },
+          { L:"E", h:"Ethical — จริยธรรม", p:"ไม่ละเมิดสิทธิ์ ปลอดภัยต่อผู้เข้าร่วม และผ่าน IRB/EC ได้" },
+          { L:"R", h:"Relevant — ตรงประเด็น", p:"สำคัญต่อการพยาบาล นโยบายสุขภาพ และนำผลไปใช้ได้จริง" }
+        ]},
+        { type:"callout", k:"tip", t:"<b>เทคนิคปิรามิดหัวกลับ (Funnel):</b> เขียน problem statement จากกว้างไปแคบ — ปัญหาระดับโลก → ประเทศไทย → บริบทเฉพาะ/กลุ่มเป้าหมาย → ช่องว่าง → คำถามของเรา ความยาวเหมาะสม 1–3 ย่อหน้า ทุกตัวเลขต้องมีการอ้างอิง" },
+        { type:"table", title:"กรอบ PICO(T): ลับคมคำถามวิจัย", head:["ตัวย่อ","องค์ประกอบ","ความหมาย","ตัวอย่าง (ผดุงครรภ์)"], rows:[
+          ["<span class='mono-cell'>P</span>","Population/Problem","ประชากร/ผู้ป่วย/ปัญหา","มารดาครรภ์แรกหลังคลอดปกติ"],
+          ["<span class='mono-cell'>I</span>","Intervention","สิ่งแทรกแซง/ปัจจัยที่สนใจ","โปรแกรมส่งเสริมสมรรถนะผ่านแอป mHealth"],
+          ["<span class='mono-cell'>C</span>","Comparison","กลุ่มเปรียบเทียบ","การพยาบาลตามปกติ (usual care)"],
+          ["<span class='mono-cell'>O</span>","Outcome","ผลลัพธ์","อัตราเลี้ยงลูกด้วยนมแม่อย่างเดียว 6 สัปดาห์"],
+          ["<span class='mono-cell'>T</span>","Time","ระยะเวลา (ถ้ามี)","ติดตามถึง 6 สัปดาห์หลังคลอด"]
+        ]},
+        { type:"callout", k:"gold", t:"คำถามเชิงคุณภาพอาจใช้ <b>PEO</b> (Population–Exposure–Outcome) หรือ <b>SPIDER</b> แทน · PICO ยังเป็นกุญแจกำหนดคำค้นในหัวข้อ 2.3" },
+        { type:"two-col", title:"วัตถุประสงค์ คำถาม และสมมติฐาน", cols:[
+          { h:"วัตถุประสงค์ (Objectives)", p:"<b>ทั่วไป</b>: เป้าหมายรวม 1 ข้อ สะท้อนชื่อเรื่อง · <b>เฉพาะ</b>: แตกย่อยวัดได้จริง ระบุตัวแปร/กลุ่ม/การเปรียบเทียบ · ขึ้นต้นด้วย “เพื่อ...” + กริยาที่วัดได้ ตามหลัก SMART (ใช้: ศึกษา เปรียบเทียบ วิเคราะห์ ทดสอบ · เลี่ยง: เข้าใจ ตระหนัก ทราบ)" },
+          { h:"สมมติฐาน (Hypothesis)", p:"ข้อความคาดการณ์ความสัมพันธ์ระหว่างตัวแปร ทดสอบได้ด้วยสถิติ — ใช้กับเชิงความสัมพันธ์/ทดลอง · H₀ (null) = ไม่มีความต่าง/สัมพันธ์ · H₁ (alternative) = มีความต่าง/สัมพันธ์ · มีทิศทาง (one-tailed) เมื่อหลักฐานเดิมชัด, ไม่มีทิศทาง (two-tailed) เมื่อยังไม่ชัด" }
+        ]},
+        { type:"chain", title:"กฎทอง: ทุกองค์ประกอบต้อง align กัน", nodes:[
+          { lab:"ปัญหาการวิจัย", p:"อัตราเลี้ยงลูกด้วยนมแม่อย่างเดียว 6 เดือนของไทยยังต่ำกว่าเป้า WHO โดยเฉพาะมารดาครรภ์แรก ยังขาดหลักฐานโปรแกรม mHealth ในบริบทไทย" },
+          { lab:"วัตถุประสงค์", p:"เพื่อเปรียบเทียบอัตราเลี้ยงลูกด้วยนมแม่อย่างเดียวที่ 6 สัปดาห์ ระหว่างกลุ่มที่ได้รับโปรแกรม mHealth กับกลุ่มที่ได้รับการพยาบาลตามปกติ" },
+          { lab:"คำถามการวิจัย", p:"มารดาครรภ์แรกที่ได้รับโปรแกรม mHealth มีอัตราเลี้ยงลูกด้วยนมแม่อย่างเดียวที่ 6 สัปดาห์ แตกต่างจากกลุ่มปกติหรือไม่" },
+          { lab:"สมมติฐาน (H₁)", p:"กลุ่มที่ได้รับโปรแกรม mHealth มีอัตราเลี้ยงลูกด้วยนมแม่อย่างเดียวที่ 6 สัปดาห์ สูงกว่ากลุ่มปกติ (directional)" }
+        ]},
+        { type:"callout", k:"warn", t:"ถ้าอ่านจากปัญหาถึงสมมติฐานแล้วรู้สึกว่า “เปลี่ยนเรื่อง” กลางทาง — แสดงว่ายัง <b>ไม่ align</b> ต้องใช้ตัวแปร ประชากร และผลลัพธ์ชุดเดียวกันตลอด" }
+      ],
+      quiz: [
+        { tag:"FINER", llo:"LLO 1.1",
+          stem:"นักศึกษาเสนอหัวข้อวิจัยที่น่าสนใจมาก แต่ต้องใช้กลุ่มตัวอย่าง 2,000 คน ติดตาม 5 ปี ขณะที่มีเวลาทำวิทยานิพนธ์เพียง 1 ปี ปัญหานี้ขัดกับเกณฑ์ FINER ข้อใดมากที่สุด?",
+          opts:["Interesting","Feasible","Novel","Relevant"], correct:1,
+          ex:{ right:"ถูกต้อง — <b>Feasible (ความเป็นไปได้)</b> ครอบคลุมเรื่องเวลา งบประมาณ กลุ่มตัวอย่าง และทรัพยากร หัวข้อที่ดีแต่ทำไม่เสร็จในกรอบเวลา/ทรัพยากรที่มี ถือว่าไม่ผ่านเกณฑ์นี้",
+                miss:"หัวข้อยัง Interesting/Novel/Relevant ได้ แต่ปัญหาหลักคือ <b>ทำจริงไม่ได้ในกรอบเวลาและทรัพยากร</b> ซึ่งตรงกับ Feasible" } },
+        { tag:"PICO", llo:"LLO 1.2",
+          stem:"จากคำถาม “มารดาวัยรุ่นที่ได้รับการเยี่ยมบ้านโดยพยาบาล มีภาวะซึมเศร้าหลังคลอดต่ำกว่ามารดาที่ได้รับการดูแลตามปกติหรือไม่” — คำว่า “ภาวะซึมเศร้าหลังคลอด” คือองค์ประกอบใดของ PICO?",
+          opts:["Population","Intervention","Comparison","Outcome"], correct:3,
+          ex:{ right:"ใช่ — ภาวะซึมเศร้าหลังคลอดคือ <b>Outcome (O)</b> ซึ่งเป็นผลลัพธ์ที่ถูกวัด ส่วน P = มารดาวัยรุ่น, I = การเยี่ยมบ้าน, C = การดูแลตามปกติ",
+                miss:"ลองแยกใหม่: P = มารดาวัยรุ่น · I = การเยี่ยมบ้าน · C = การดูแลตามปกติ · <b>O = ภาวะซึมเศร้าหลังคลอด (ผลลัพธ์ที่วัด)</b>" } },
+        { tag:"Alignment", llo:"LLO 1.2",
+          stem:"วัตถุประสงค์เขียนว่า “เพื่อเปรียบเทียบคะแนนความรู้...ระหว่างสองกลุ่ม” แต่สมมติฐานเขียนว่า “สมรรถนะแห่งตนมีความสัมพันธ์กับระยะเวลาให้นม” ปัญหาคืออะไร?",
+          opts:["สมมติฐานไม่มีทิศทาง","วัตถุประสงค์กับสมมติฐานไม่ align (คนละตัวแปร/คนละคำถาม)","ควรใช้ H₀ แทน H₁","วัตถุประสงค์ควรเป็นเชิงพรรณนา"], correct:1,
+          ex:{ right:"ถูกต้อง — วัตถุประสงค์พูดถึง “เปรียบเทียบคะแนนความรู้” แต่สมมติฐานพูดถึง “ความสัมพันธ์ของสมรรถนะกับระยะเวลาให้นม” เป็นคนละตัวแปรและคนละชนิดคำถาม = <b>ไม่ align</b>",
+                miss:"กฎทองคือทุกองค์ประกอบต้องใช้ตัวแปร/ประชากร/ผลลัพธ์ชุดเดียวกัน ในข้อนี้วัตถุประสงค์กับสมมติฐาน <b>พูดคนละเรื่อง</b>" } },
+        { tag:"Hypothesis", llo:"LLO 1.1",
+          stem:"การวิจัยใดที่ “ไม่จำเป็น” ต้องมีสมมติฐานการวิจัย?",
+          opts:["การวิจัยเชิงทดลอง (RCT)","การวิจัยเชิงความสัมพันธ์","การวิจัยเชิงพรรณนาและเชิงคุณภาพ","การวิจัยกึ่งทดลอง"], correct:2,
+          ex:{ right:"ใช่ — สมมติฐานใช้ทดสอบความสัมพันธ์/ความแตกต่างด้วยสถิติ จึงเหมาะกับเชิงความสัมพันธ์และเชิงทดลอง ส่วน <b>เชิงพรรณนาและเชิงคุณภาพ</b> มุ่งบรรยาย/ทำความเข้าใจ ไม่จำเป็นต้องมีสมมติฐาน",
+                miss:"สมมติฐานคือข้อความที่ทดสอบทางสถิติ — เชิงทดลอง/ความสัมพันธ์ต้องมี แต่ <b>เชิงพรรณนาและเชิงคุณภาพไม่จำเป็น</b>" } },
+        { tag:"Objectives", llo:"LLO 1.1",
+          stem:"คำกริยาในวัตถุประสงค์ข้อใด “วัดผลได้ยากที่สุด” และควรหลีกเลี่ยง?",
+          opts:["เปรียบเทียบ","ทดสอบผล","เข้าใจ","วิเคราะห์ความสัมพันธ์"], correct:2,
+          ex:{ right:"ถูกต้อง — “<b>เข้าใจ</b>” เป็นภาวะภายในที่วัดตรงๆ ไม่ได้ จึงควรเลี่ยงในวัตถุประสงค์เชิงปริมาณ ควรใช้กริยาที่วัดได้ เช่น เปรียบเทียบ ทดสอบ วิเคราะห์",
+                miss:"กริยาที่วัดได้ เช่น เปรียบเทียบ ทดสอบ วิเคราะห์ ส่วน “เข้าใจ/ตระหนัก/ทราบ” เป็นภาวะภายในที่ <b>วัดตรงๆ ไม่ได้</b>" } }
+      ]
+    },
+
+    /* ---------------- 2.2 ---------------- */
+    t22: {
+      ch:"ch2", code:"2.2",
+      title:"ตัวแปรและคำนิยามเชิงปฏิบัติการ",
+      en:"Variables & Operational Definitions",
+      llo:["LLO 1.1","LLO 1.2"], roadmap:1,
+      before:{
+        objectives:[
+          { tag:"LLO 1.1", t:"จำแนกประเภทและระดับการวัดของตัวแปรได้ถูกต้อง" },
+          { tag:"LLO 1.2", t:"เขียนนิยามเชิงทฤษฎีและเชิงปฏิบัติการของตัวแปรได้" }
+        ],
+        target:"นิยามตัวแปรทุกตัวใน <b>โครงร่างการวิจัย</b> ให้ครบ 2 ระดับ พร้อมระบุระดับการวัดที่กำหนดสถิติที่จะใช้",
+        warmups:[
+          { q:"ตัวแปร “ระดับความปวด (น้อย/ปานกลาง/มาก)” อยู่ในระดับการวัดใด และต่างจาก “คะแนนความปวด 0–10” อย่างไร?", a:"“น้อย/กลาง/มาก” = <b>Ordinal</b> (มีลำดับ แต่ช่วงห่างไม่เท่ากัน) ส่วน “0–10” เข้าใกล้ <b>Interval/Ratio</b> มากกว่า — ระดับการวัดต่างกัน สถิติที่ใช้ก็ต่างกัน" },
+          { q:"ทำไม “นิยามเชิงปฏิบัติการ” จึงสำคัญต่อความเป็นวิทยาศาสตร์?", a:"เพราะมันบอกว่าจะ <b>วัดอย่างไร</b> (เครื่องมือ กี่ข้อ คะแนนช่วงใด แปลผลอย่างไร) ทำให้ผู้อื่น <b>ทำซ้ำได้ (replicable)</b> ซึ่งเป็นหัวใจของงานวิจัย" }
+        ]
+      },
+      during:[
+        { type:"lead", t:"ตัวแปรคือสิ่งที่เราวัด นิยามคือสัญญาว่าจะวัดอย่างไร และระดับการวัดคือสิ่งที่กำหนดสถิติที่ใช้ได้ — วางแผนทั้งหมดนี้ตั้งแต่ตอนเขียนโครงร่าง ไม่ใช่รอจนเก็บข้อมูลเสร็จ" },
+        { type:"concept-grid", title:"ประเภทของตัวแปร", items:[
+          { ic:"➡️", h:"ตัวแปรต้น / อิสระ", en:"Independent (IV)", p:"สิ่งที่ผู้วิจัยจัดกระทำหรือเชื่อว่าเป็น “เหตุ” เช่น โปรแกรมการพยาบาล" },
+          { ic:"🎯", h:"ตัวแปรตาม", en:"Dependent (DV)", p:"ผลลัพธ์ที่ถูกวัด เปลี่ยนตาม IV เช่น อัตราเลี้ยงลูกด้วยนมแม่" },
+          { ic:"⚠️", h:"ตัวแปรแทรกซ้อน", en:"Extraneous", p:"ตัวแปรอื่นที่อาจมีผลต่อ DV ต้องควบคุมด้วยการออกแบบ เช่น เกณฑ์คัดเข้า การสุ่ม" },
+          { ic:"🔀", h:"ตัวแปรกวน", en:"Confounding", p:"สัมพันธ์ทั้งกับ IV และ DV ทำให้สรุปเหตุ-ผลผิด เช่น อายุ รายได้ การศึกษา" },
+          { ic:"🔗", h:"ตัวแปรส่งผ่าน", en:"Mediator", p:"อธิบาย “กลไก” ที่ IV ส่งผลต่อ DV" },
+          { ic:"🎚️", h:"ตัวแปรกำกับ", en:"Moderator", p:"เปลี่ยน “ความแรง/ทิศทาง” ของความสัมพันธ์ระหว่าง IV กับ DV" }
+        ]},
+        { type:"table", title:"ระดับการวัด 4 ระดับ (NOIR) — กำหนดสถิติที่ใช้", head:["ระดับ","คุณสมบัติ","ตัวอย่างทางการพยาบาล","สถิติที่เหมาะ"], rows:[
+          ["<b>Nominal</b><br>นามบัญญัติ","จำแนกกลุ่ม ไม่มีลำดับ","เพศ, กรุ๊ปเลือด, ชนิดการคลอด","ความถี่ ร้อยละ, Chi-square"],
+          ["<b>Ordinal</b><br>เรียงอันดับ","มีลำดับ ช่วงห่างไม่เท่ากัน","ระดับความปวด, ระยะมะเร็ง, Likert","มัธยฐาน, Mann-Whitney U"],
+          ["<b>Interval</b><br>อันตรภาค","ช่วงห่างเท่ากัน ไม่มีศูนย์แท้","อุณหภูมิ °C, คะแนนความรู้","ค่าเฉลี่ย SD, t-test"],
+          ["<b>Ratio</b><br>อัตราส่วน","ช่วงห่างเท่ากัน มีศูนย์แท้","น้ำหนัก, ความดัน, ปริมาณน้ำนม","ทุกสถิติ รวมอัตราส่วน"]
+        ]},
+        { type:"callout", k:"warn", t:"<b>สำคัญ:</b> ระดับการวัดกำหนดสถิติที่ใช้ได้ — วางแผนตั้งแต่ตอนนิยามตัวแปร อย่ารอจนเก็บข้อมูลเสร็จแล้วค่อยคิดว่าจะใช้สถิติอะไร" },
+        { type:"two-col", title:"นิยาม 2 ระดับ", cols:[
+          { h:"นิยามเชิงทฤษฎี/มโนทัศน์", p:"<i>Conceptual Definition</i> — ความหมายเชิงนามธรรมตามทฤษฎี ตอบว่า “แนวคิดนี้คืออะไร” อ้างอิงนักทฤษฎี เช่น สมรรถนะแห่งตน = ความเชื่อมั่นในความสามารถของตน (Bandura, 1997)" },
+          { h:"นิยามเชิงปฏิบัติการ", p:"<i>Operational Definition</i> — ระบุว่าจะ “วัดอย่างไร” ในการศึกษานี้: เครื่องมืออะไร ของใคร กี่ข้อ คะแนนช่วงใด แปลผลอย่างไร เช่น วัดด้วย BSES-SF 14 ข้อ คะแนน 14–70" }
+        ]},
+        { type:"callout", k:"tip", t:"<b>นิยามเชิงปฏิบัติการที่ดี:</b> ระบุเครื่องมือ + ผู้พัฒนา + ปี + จำนวนข้อ + พิสัยคะแนน + เกณฑ์แปลผล (cut-off) + ระดับการวัด — เขียนให้ผู้อื่นทำซ้ำได้" }
+      ],
+      quiz:[
+        { tag:"Levels", llo:"LLO 1.1",
+          stem:"ตัวแปร “น้ำหนักแรกเกิดของทารก (กรัม)” อยู่ในระดับการวัดใด?",
+          opts:["Nominal","Ordinal","Interval","Ratio"], correct:3,
+          ex:{ right:"ถูกต้อง — น้ำหนักมี <b>ศูนย์แท้ (0 กรัม = ไม่มีน้ำหนัก)</b> และช่วงห่างเท่ากัน จึงเป็น Ratio ใช้ได้ทุกสถิติรวมการเปรียบเทียบเชิงอัตราส่วน",
+                miss:"น้ำหนักมีศูนย์แท้ (0 = ไม่มีน้ำหนักจริง) และช่วงเท่ากัน → <b>Ratio</b> ไม่ใช่ Interval (ซึ่งไม่มีศูนย์แท้ เช่น อุณหภูมิ °C)" } },
+        { tag:"Variables", llo:"LLO 1.1",
+          stem:"ในการศึกษา “ผลของโปรแกรมออกกำลังกายต่อระดับน้ำตาลในเลือด” โดยพบว่า อายุ มีผลต่อทั้งการเข้าร่วมโปรแกรมและระดับน้ำตาล — อายุเป็นตัวแปรชนิดใด?",
+          opts:["ตัวแปรตาม (DV)","ตัวแปรกวน (Confounding)","ตัวแปรส่งผ่าน (Mediator)","ตัวแปรกำกับ (Moderator)"], correct:1,
+          ex:{ right:"ถูกต้อง — เมื่อตัวแปรหนึ่งสัมพันธ์ <b>ทั้งกับ IV และ DV</b> จนอาจทำให้สรุปเหตุ-ผลผิด เรียกว่า <b>ตัวแปรกวน (Confounding)</b>",
+                miss:"กุญแจคือ “สัมพันธ์ทั้งกับ IV และ DV” → นี่คือนิยามของ <b>Confounding variable</b> ต่างจาก mediator (อธิบายกลไก) หรือ moderator (เปลี่ยนความแรง)" } },
+        { tag:"Definition", llo:"LLO 1.2",
+          stem:"ข้อความ “วัดด้วย Postpartum Fatigue Scale ฉบับภาษาไทย 10 ข้อ คะแนน 10–40 คะแนนสูง = เหนื่อยล้ามาก” เป็นนิยามชนิดใด?",
+          opts:["นิยามเชิงทฤษฎี","นิยามเชิงปฏิบัติการ","สมมติฐาน","กรอบแนวคิด"], correct:1,
+          ex:{ right:"ถูกต้อง — เพราะระบุ <b>วิธีวัด</b> (เครื่องมือ จำนวนข้อ พิสัยคะแนน การแปลผล) ชัดเจน = นิยามเชิงปฏิบัติการ",
+                miss:"สังเกตว่าข้อความบอก “วัดอย่างไร” (เครื่องมือ/ข้อ/คะแนน) ไม่ใช่ “คืออะไรเชิงทฤษฎี” → จึงเป็น <b>นิยามเชิงปฏิบัติการ</b>" } },
+        { tag:"Mediator", llo:"LLO 1.1",
+          stem:"ตัวแปรที่อธิบาย “กลไก” ว่าเหตุใด IV จึงส่งผลต่อ DV เรียกว่าอะไร?",
+          opts:["Moderator","Mediator","Confounder","Extraneous"], correct:1,
+          ex:{ right:"ถูกต้อง — <b>Mediator</b> อยู่ “ระหว่าง” IV และ DV อธิบายกลไกการส่งผ่าน ส่วน Moderator เปลี่ยนความแรง/ทิศทางของความสัมพันธ์",
+                miss:"จำง่ายๆ: <b>Me</b>diator = <b>Me</b>chanism (กลไก) · Moderator = ปรับความแรง" } }
+      ]
+    },
+
+    /* ---------------- 2.3 ---------------- */
+    t23: {
+      ch:"ch2", code:"2.3",
+      title:"ทบทวนวรรณกรรมอย่างเป็นระบบและการบูรณาการ AI",
+      en:"Systematic Literature Review & AI Integration",
+      llo:["LLO 4.1","LLO 4.2"], roadmap:2,
+      before:{
+        objectives:[
+          { tag:"LLO 4.1", t:"สืบค้นวรรณกรรมอย่างเป็นระบบด้วย PICO, Boolean และหลายฐานข้อมูลได้" },
+          { tag:"LLO 4.2", t:"ประเมินระดับหลักฐานและใช้เครื่องมือ AI ในการทบทวนวรรณกรรมอย่างมีจริยธรรมได้" }
+        ],
+        target:"สืบค้นและสังเคราะห์วรรณกรรมเพื่อสร้าง <b>ความเป็นมาและความสำคัญ</b> และกำหนดช่องว่างความรู้ในโครงร่างการวิจัย",
+        warmups:[
+          { q:"คุณเคยใช้ AI (เช่น ChatGPT, Claude) ช่วยหางานวิจัยไหม? ความเสี่ยงใหญ่ที่สุดคืออะไร?", a:"<b>“อ้างอิงหลอน” (hallucinated citations)</b> — AI อาจสร้างชื่อบทความ ผู้แต่ง หรือ DOI ที่ดูสมจริงแต่ไม่มีอยู่จริง ต้องตรวจสอบกับบทความต้นฉบับทุกครั้ง" },
+          { q:"ทำไมต้องค้นอย่างน้อย 2–3 ฐานข้อมูล แทนที่จะค้นแค่ Google Scholar?", a:"แต่ละฐานครอบคลุมวารสารต่างกัน การค้นหลายฐานช่วยลด <b>selection bias</b> และทำให้การทบทวน <b>โปร่งใสและทำซ้ำได้</b> ส่วน Google Scholar ใช้เสริม ไม่ใช่ฐานหลัก" }
+        ]
+      },
+      during:[
+        { type:"lead", t:"การทบทวนวรรณกรรมไม่ใช่แค่ “อ่านงานคนอื่น” แต่คือการพิสูจน์ช่องว่างความรู้ สร้างกรอบแนวคิด และชี้นำระเบียบวิธี ยุคนี้ AI ช่วยให้เร็วขึ้นมาก แต่ความถูกต้องและจริยธรรมยังเป็นหน้าที่ของผู้วิจัย" },
+        { type:"concept-grid", title:"การทบทวนวรรณกรรมมีไว้ทำไม", items:[
+          { ic:"🔍", h:"ยืนยันช่องว่างความรู้", en:"Confirm the gap", p:"พิสูจน์ว่าคำถามวิจัยยังไม่มีคำตอบ หรือยังขัดแย้ง/ไม่ครอบคลุมบริบทเรา" },
+          { ic:"🧩", h:"สร้างกรอบแนวคิด", en:"Build framework", p:"ระบุทฤษฎี ตัวแปร และความสัมพันธ์ที่มีหลักฐานรองรับ (เชื่อมสู่ 2.4)" },
+          { ic:"🧭", h:"ชี้นำระเบียบวิธี", en:"Guide methods", p:"เรียนรู้ design เครื่องมือ และการวิเคราะห์จากงานก่อนหน้า" },
+          { ic:"⚖️", h:"เป็นฐานเปรียบเทียบผล", en:"Compare findings", p:"ใช้อภิปรายผลว่าสอดคล้องหรือต่างจากงานเดิมอย่างไร" }
+        ]},
+        { type:"steps", title:"6 ขั้นตอนการสืบค้นอย่างเป็นระบบ", items:[
+          { n:1, h:"ตั้งคำถาม", p:"กำหนดด้วย PICO(T) + เกณฑ์คัดเข้า–คัดออก (ปี ภาษา ประเภทการศึกษา)" },
+          { n:2, h:"กำหนดคำค้น", p:"แปลง PICO เป็น keywords + คำพ้อง + MeSH/CINAHL headings เชื่อมด้วย Boolean (AND, OR, NOT)" },
+          { n:3, h:"สืบค้นฐานข้อมูล", p:"ค้นอย่างน้อย 2–3 ฐาน บันทึก search string จำนวนผลลัพธ์ และวันที่ค้น" },
+          { n:4, h:"คัดกรอง", p:"คัดจากชื่อเรื่อง/บทคัดย่อ → ฉบับเต็ม รายงานด้วย PRISMA Flow Diagram" },
+          { n:5, h:"สกัดและประเมิน", p:"สกัดข้อมูลลงตารางสังเคราะห์ (matrix) + ประเมินคุณภาพ/ระดับหลักฐาน" },
+          { n:6, h:"สังเคราะห์", p:"จัดกลุ่มประเด็น เปรียบเทียบ ชี้ข้อค้นพบที่สอดคล้อง/ขัดแย้ง สรุปช่องว่าง" }
+        ]},
+        { type:"two-col", title:"ฐานข้อมูลและการสร้าง Search String", cols:[
+          { h:"ฐานข้อมูลที่ควรรู้จัก", p:"<b>PubMed/MEDLINE</b> ชีวการแพทย์ (MeSH) · <b>CINAHL</b> เฉพาะการพยาบาล · <b>Scopus/Web of Science</b> สหสาขา ดู citation · <b>Cochrane/JBI</b> systematic review · <b>ThaiJO/TCI/ThaiLIS</b> วารสารไทย · <b>Google Scholar</b> ค้นเสริม ไม่ใช่ฐานหลัก" },
+          { h:"ตัวอย่าง Boolean จาก PICO", p:"<span class='en'>P: (\"first-time mother*\" OR primipara*)</span><br><span class='en'>AND</span><br><span class='en'>I: (mHealth OR \"mobile health\" OR smartphone*)</span><br><span class='en'>AND</span><br><span class='en'>O: (breastfeeding OR lactation)</span><br><br>OR เชื่อมคำพ้อง · AND เชื่อมแนวคิด · \"...\" ค้นทั้งวลี · * ตัดท้ายคำ" }
+        ]},
+        { type:"pyramid", title:"ลำดับชั้นของหลักฐาน (Hierarchy of Evidence)", levels:[
+          { lv:"ระดับ 1", t:"Systematic Review & Meta-analysis", w:100 },
+          { lv:"ระดับ 2", t:"Randomized Controlled Trial (RCT)", w:86 },
+          { lv:"ระดับ 3", t:"Quasi-experimental Studies", w:72 },
+          { lv:"ระดับ 4", t:"Cohort / Case-Control Studies", w:58 },
+          { lv:"ระดับ 5", t:"Cross-sectional / Descriptive", w:44 },
+          { lv:"ระดับ 6–7", t:"Case Report · Expert Opinion", w:30 }
+        ]},
+        { type:"callout", k:"tip", t:"ยิ่งสูง = ความน่าเชื่อถือเชิงสาเหตุยิ่งมาก แต่ต้องดูคุณภาพแต่ละเรื่องประกอบ (JBI Critical Appraisal, CASP) · คำถามเชิงคุณภาพใช้ลำดับชั้นนี้ตรงๆ ไม่ได้" },
+        { type:"concept-grid", title:"เครื่องมือ AI สำหรับทบทวนวรรณกรรม", items:[
+          { ic:"💬", h:"AI Chatbots", en:"ChatGPT, Claude, Gemini", p:"ระดมสมอง ขัดเกลาคำถาม แนะนำคำค้น สรุปแนวคิด อธิบายศัพท์ยาก" },
+          { ic:"🔎", h:"AI Search/Discovery", en:"Elicit, Consensus, SciSpace", p:"ค้นบทความจากคำถามภาษาธรรมชาติ สรุปข้อค้นพบ พร้อมลิงก์บทความจริง" },
+          { ic:"🕸️", h:"Citation Mapping", en:"Research Rabbit, Connected Papers", p:"สำรวจเครือข่ายงานวิจัย หา seminal papers และงานล่าสุด" },
+          { ic:"✅", h:"Screening/SR Tools", en:"Rayyan, Covidence, ASReview", p:"ช่วยคัดกรองชื่อ/บทคัดย่อแบบ semi-automated" },
+          { ic:"📑", h:"Reference Manager", en:"Zotero, EndNote, Mendeley", p:"จัดการอ้างอิง สร้าง citation อัตโนมัติตาม APA 7" }
+        ]},
+        { type:"two-col", title:"การใช้ AI อย่างมีความรับผิดชอบ", cols:[
+          { h:"✓ ควรทำ (Do)", p:"ใช้ AI ระดมสมอง วางโครง ปรับภาษา ช่วยสืบค้น · <b>ตรวจทุกการอ้างอิงกับบทความต้นฉบับจริงเสมอ</b> · เปิดเผยการใช้ AI ตามข้อกำหนด · รับผิดชอบเนื้อหาสุดท้ายในฐานะผู้นิพนธ์" },
+          { h:"✗ ไม่ควรทำ (Don't)", p:"เชื่ออ้างอิงที่ AI สร้างโดยไม่ตรวจ (เสี่ยงหลอน) · ให้ AI เขียนแทนทั้งชิ้นแล้วส่งเป็นงานตน · ใส่ข้อมูลผู้ป่วย/ข้อมูลลับลง AI สาธารณะ · ระบุ AI เป็นผู้นิพนธ์ร่วม (ICMJE/COPE ไม่อนุญาต)" }
+        ]},
+        { type:"callout", k:"gold", t:"<b>หลักคิด:</b> AI ช่วยให้เร็วขึ้น แต่ความถูกต้อง จริยธรรม และวิจารณญาณยังเป็นหน้าที่ของผู้วิจัย — สอดคล้องกับ CLO 5 จริยธรรมทางวิชาการ" }
+      ],
+      quiz:[
+        { tag:"AI Ethics", llo:"LLO 4.2",
+          stem:"นักศึกษาขอให้ AI สร้างรายการอ้างอิง 10 รายการสำหรับบทนำ แล้วคัดลอกใส่โครงร่างทันทีโดยไม่ตรวจสอบ ความเสี่ยงที่ร้ายแรงที่สุดคืออะไร?",
+          opts:["AI ใช้ภาษาทางการเกินไป","อ้างอิงหลอน (hallucinated citations) ที่ไม่มีอยู่จริง","รายการอ้างอิงยาวเกินไป","ไม่ได้จัดเรียงตามตัวอักษร"], correct:1,
+          ex:{ right:"ถูกต้อง — AI อาจสร้างชื่อบทความ/ผู้แต่ง/DOI ที่ดูสมจริงแต่ <b>ไม่มีอยู่จริง</b> การไม่ตรวจสอบกับต้นฉบับถือเป็นความผิดทางวิชาการ ต้อง verify ทุกรายการเสมอ",
+                miss:"ปัญหาหลักคือ <b>“อ้างอิงหลอน”</b> — AI สร้างการอ้างอิงปลอมที่ดูจริง การส่งงานโดยไม่ตรวจสอบกับบทความต้นฉบับเป็นการประพฤติผิดทางวิชาการ" } },
+        { tag:"Boolean", llo:"LLO 4.1",
+          stem:"ต้องการค้นบทความที่กล่าวถึง “primipara” หรือ “first-time mother” (คำพ้องความหมายเดียวกัน) ควรใช้ตัวเชื่อม Boolean ใด?",
+          opts:["AND","OR","NOT","XOR"], correct:1,
+          ex:{ right:"ถูกต้อง — ใช้ <b>OR</b> เชื่อมคำพ้องในแนวคิดเดียวกัน เพื่อขยายผลการค้นให้ครอบคลุมทุกคำที่หมายถึงสิ่งเดียวกัน",
+                miss:"จำหลัก: <b>OR เชื่อมคำพ้อง (ขยายผล)</b> · AND เชื่อมแนวคิดต่างกัน (จำกัดผล) · NOT ตัดคำที่ไม่ต้องการ" } },
+        { tag:"Evidence", llo:"LLO 4.2",
+          stem:"หลักฐานประเภทใดอยู่ใน “ระดับสูงสุด” ของลำดับชั้นหลักฐานเชิงปริมาณ?",
+          opts:["Randomized Controlled Trial","Cohort Study","Systematic Review & Meta-analysis","Expert Opinion"], correct:2,
+          ex:{ right:"ถูกต้อง — <b>Systematic Review & Meta-analysis</b> สังเคราะห์หลักฐานจากหลายการศึกษาอย่างเป็นระบบ จึงอยู่ระดับสูงสุด (ระดับ 1) เหนือ RCT เดี่ยว",
+                miss:"RCT คือระดับ 2 แต่ <b>Systematic Review/Meta-analysis (ระดับ 1)</b> รวมหลาย RCT เข้าด้วยกันอย่างเป็นระบบ จึงสูงกว่า" } },
+        { tag:"Database", llo:"LLO 4.1",
+          stem:"ฐานข้อมูลใดเป็นฐานเฉพาะทางการพยาบาลและสหเวชศาสตร์โดยตรง?",
+          opts:["PubMed","CINAHL","Google Scholar","Scopus"], correct:1,
+          ex:{ right:"ถูกต้อง — <b>CINAHL</b> (Cumulative Index to Nursing and Allied Health Literature) เป็นฐานเฉพาะการพยาบาลและสหเวชศาสตร์",
+                miss:"PubMed เน้นชีวการแพทย์ · Scopus สหสาขา · Google Scholar ค้นเสริม · ฐานเฉพาะพยาบาลคือ <b>CINAHL</b>" } },
+        { tag:"AI Ethics", llo:"LLO 4.2",
+          stem:"เหตุใด ICMJE และ COPE จึง “ไม่อนุญาต” ให้ระบุ AI เป็นผู้นิพนธ์ร่วม (co-author)?",
+          opts:["AI เขียนภาษาไม่ดีพอ","เพราะ AI ไม่สามารถรับผิดชอบต่อความถูกต้องและความซื่อสัตย์ของงานได้","เพราะ AI ไม่มีวุฒิการศึกษา","เพราะวารสารไม่มีช่องให้กรอกชื่อ AI"], correct:1,
+          ex:{ right:"ถูกต้อง — การเป็นผู้นิพนธ์ต้อง <b>รับผิดชอบ (accountability)</b> ต่อเนื้อหาและความซื่อสัตย์ของงาน ซึ่ง AI ทำไม่ได้ จึงระบุเป็นผู้นิพนธ์ร่วมไม่ได้",
+                miss:"หลักการคือ authorship = ความรับผิดชอบ AI <b>รับผิดชอบงานไม่ได้</b> จึงเป็นผู้นิพนธ์ร่วมไม่ได้ (ให้เปิดเผยการใช้ในส่วน disclosure แทน)" } }
+      ]
+    },
+
+    /* ---------------- 2.4 ---------------- */
+    t24: {
+      ch:"ch2", code:"2.4",
+      title:"กรอบแนวคิดการวิจัย",
+      en:"Conceptual Framework",
+      llo:["LLO 1.1","LLO 1.2"], roadmap:3,
+      before:{
+        objectives:[
+          { tag:"LLO 1.1", t:"อธิบายความแตกต่างระหว่างกรอบทฤษฎีและกรอบแนวคิดได้" },
+          { tag:"LLO 1.2", t:"พัฒนากรอบแนวคิดการวิจัยจากทฤษฎีและวรรณกรรมได้" }
+        ],
+        target:"วาด <b>กรอบแนวคิดการวิจัย</b> ที่เชื่อม IV → DV พร้อมเหตุผลรองรับ สำหรับโครงร่างการวิจัย",
+        warmups:[
+          { q:"ต่างกันอย่างไรระหว่าง “กรอบทฤษฎี” กับ “กรอบแนวคิด”?", a:"<b>กรอบทฤษฎี</b> ใช้ทฤษฎีเดียวที่มีอยู่แล้วเป็นฐานทั้งเรื่อง · <b>กรอบแนวคิด</b> ผู้วิจัยสังเคราะห์ขึ้นเองจากหลายทฤษฎี + วรรณกรรม แสดงตัวแปร “เฉพาะของการศึกษานี้”" },
+          { q:"ทำไมทุกเส้นความสัมพันธ์ในกรอบแนวคิดต้อง “มีหลักฐานรองรับ”?", a:"เพราะกรอบแนวคิดคือสมมติฐานเชิงภาพ ถ้าลากเส้นโดยไม่มีหลักฐาน = เดา การมีหลักฐานรองรับทำให้กรอบ <b>น่าเชื่อถือและป้องกันได้</b> เมื่อนำเสนอ" }
+        ]
+      },
+      during:[
+        { type:"lead", t:"กรอบแนวคิดคือแผนที่ความสัมพันธ์ของตัวแปรในงานวิจัยของเรา มันเชื่อมงานเข้ากับองค์ความรู้เดิม ชี้นำการเลือกตัวแปรและเครื่องมือ และเป็นฐานในการตั้งสมมติฐาน" },
+        { type:"two-col", title:"กรอบทฤษฎี vs กรอบแนวคิด", cols:[
+          { h:"กรอบทฤษฎี (Theoretical)", p:"ใช้ <b>ทฤษฎีเดียว</b> ที่มีอยู่แล้วเป็นฐานทั้งเรื่อง แนวคิด/ความสัมพันธ์มาจากทฤษฎีโดยตรง เหมาะเมื่อทดสอบ/ขยายทฤษฎี เช่น Self-Efficacy (Bandura), Theory of Planned Behavior, Orem's Self-Care" },
+          { h:"กรอบแนวคิด (Conceptual)", p:"ผู้วิจัย <b>สังเคราะห์ขึ้นเอง</b> จากหลายทฤษฎี + ผลการทบทวนวรรณกรรม แสดงตัวแปร/ความสัมพันธ์ “เฉพาะของการศึกษานี้” พบบ่อยที่สุดในวิทยานิพนธ์ มักนำเสนอเป็นแผนภาพ IV → DV" }
+        ]},
+        { type:"callout", k:"tip", t:"<b>ทำไมต้องมีกรอบแนวคิด?</b> (1) เชื่อมงานเข้ากับองค์ความรู้เดิม (2) ชี้นำการเลือกตัวแปรและเครื่องมือ (3) เป็นฐานตั้งสมมติฐาน (4) ช่วยอภิปรายผลว่าสอดคล้อง/ขัดแย้งกับทฤษฎีอย่างไร" },
+        { type:"steps", title:"4 ขั้นตอนพัฒนากรอบแนวคิด", items:[
+          { n:1, h:"ทบทวนทฤษฎีและวรรณกรรม", p:"ค้นหาทฤษฎี/โมเดลที่อธิบายปรากฏการณ์ และหลักฐานเกี่ยวกับปัจจัยที่เกี่ยวข้อง" },
+          { n:2, h:"เลือกตัวแปรเข้ากรอบ", p:"คัดเฉพาะตัวแปรที่มีหลักฐานสนับสนุน สอดคล้องกับคำถามวิจัย และวัดได้จริง" },
+          { n:3, h:"กำหนดความสัมพันธ์", p:"ระบุทิศทาง IV → DV รวม mediator/moderator (ถ้ามี) พร้อมเหตุผลรองรับ" },
+          { n:4, h:"วาดแผนภาพและตรวจสอบ", p:"นำเสนอเป็นแผนภาพที่อ่านง่าย ตรวจความสอดคล้องกับวัตถุประสงค์ สมมติฐาน เครื่องมือ" }
+        ]},
+        { type:"framework-demo" },
+        { type:"callout", k:"gold", t:"<b>อ่านกรอบนี้ได้ว่า:</b> โปรแกรม (IV) คาดว่าจะส่งผลต่อผลลัพธ์ (DV) โดยมีทฤษฎี Self-Efficacy เป็นกลไกอธิบาย และควบคุมตัวแปรแทรกซ้อนด้วยการออกแบบ" }
+      ],
+      quiz:[
+        { tag:"Framework", llo:"LLO 1.1",
+          stem:"นักศึกษาใช้ทฤษฎี Self-Efficacy ของ Bandura เพียงทฤษฎีเดียวเป็นฐานทั้งงานวิจัย เพื่อทดสอบทฤษฎีในบริบทใหม่ นี่คือกรอบชนิดใด?",
+          opts:["กรอบแนวคิด (Conceptual)","กรอบทฤษฎี (Theoretical)","สมมติฐาน","นิยามเชิงปฏิบัติการ"], correct:1,
+          ex:{ right:"ถูกต้อง — เมื่อใช้ <b>ทฤษฎีเดียว</b>ที่มีอยู่แล้วเป็นฐานทั้งเรื่องเพื่อทดสอบ/ขยายทฤษฎี = กรอบทฤษฎี (Theoretical Framework)",
+                miss:"กุญแจคือ “ทฤษฎีเดียวเป็นฐานทั้งเรื่อง” → <b>กรอบทฤษฎี</b> ส่วนกรอบแนวคิดคือการสังเคราะห์หลายทฤษฎี+วรรณกรรมขึ้นเอง" } },
+        { tag:"Framework", llo:"LLO 1.2",
+          stem:"ข้อใดคือเหตุผลที่ “ดีที่สุด” ในการมีกรอบแนวคิดการวิจัย?",
+          opts:["ทำให้โครงร่างดูยาวและสมบูรณ์","เป็นฐานในการเลือกตัวแปร เครื่องมือ และตั้งสมมติฐาน","เป็นข้อบังคับของบัณฑิตวิทยาลัย","ทำให้ได้คะแนนนำเสนอสูงขึ้น"], correct:1,
+          ex:{ right:"ถูกต้อง — หน้าที่หลักของกรอบแนวคิดคือ <b>ชี้นำการเลือกตัวแปร เครื่องมือ และเป็นฐานตั้งสมมติฐาน</b> รวมถึงเชื่อมงานกับองค์ความรู้เดิม",
+                miss:"กรอบแนวคิดมีหน้าที่เชิงวิชาการ: เชื่อมองค์ความรู้ ชี้นำตัวแปร/เครื่องมือ และ <b>เป็นฐานตั้งสมมติฐาน</b> ไม่ใช่เพื่อความยาวหรือคะแนน" } },
+        { tag:"Framework", llo:"LLO 1.2",
+          stem:"ในการพัฒนากรอบแนวคิด ตัวแปรที่ควร “คัดเข้า” กรอบควรมีคุณสมบัติใด?",
+          opts:["เป็นตัวแปรที่น่าสนใจแม้ไม่มีหลักฐาน","มีหลักฐานสนับสนุน สอดคล้องกับคำถามวิจัย และวัดได้จริง","เป็นตัวแปรที่หาข้อมูลง่ายที่สุด","ยิ่งมีตัวแปรมากยิ่งดี"], correct:1,
+          ex:{ right:"ถูกต้อง — ตัวแปรในกรอบต้อง <b>มีหลักฐานรองรับ + ตอบคำถามวิจัย + วัดได้จริง</b> ไม่ใช่ใส่เพราะน่าสนใจหรือหาง่าย",
+                miss:"เกณฑ์คัดตัวแปรเข้ากรอบคือ: มีหลักฐาน + สอดคล้องคำถามวิจัย + วัดได้จริง — ไม่ใช่ความน่าสนใจหรือจำนวนมาก" } }
+      ]
+    },
+
+    /* ---------------- 2.5 ---------------- */
+    t25: {
+      ch:"ch2", code:"2.5",
+      title:"การออกแบบการวิจัยและการเลือกกลุ่มตัวอย่าง",
+      en:"Research Design & Sampling",
+      llo:["LLO 1.1","LLO 3.1"], roadmap:4,
+      before:{
+        objectives:[
+          { tag:"LLO 1.1", t:"จำแนกแบบการวิจัยเชิงปริมาณ คุณภาพ และผสานวิธีได้" },
+          { tag:"LLO 3.1", t:"เลือกวิธีการสุ่ม/เลือกตัวอย่างและคำนวณขนาดกลุ่มตัวอย่างได้เหมาะสม" }
+        ],
+        target:"เลือก <b>design</b> ที่ตรงคำถามวิจัย กำหนดประชากร เกณฑ์คัดเข้า–ออก และวิธีการสุ่มสำหรับโครงร่างการวิจัย",
+        warmups:[
+          { q:"งานวิจัยพยาบาลไทยส่วนใหญ่ที่ทดสอบ “ผลของโปรแกรม” มักใช้ design แบบใด และต่างจาก RCT อย่างไร?", a:"มักใช้ <b>กึ่งทดลอง (Quasi-experimental)</b> เช่น two-group pretest-posttest — มีการจัดกระทำ แต่ <b>ขาดการสุ่มเข้ากลุ่ม (randomization)</b> ต่างจาก RCT ที่ครบทั้งจัดกระทำ + กลุ่มควบคุม + สุ่ม" },
+          { q:"“เกณฑ์คัดออก” เป็นแค่ตรงข้ามของ “เกณฑ์คัดเข้า” ใช่ไหม?", a:"<b>ไม่ใช่</b> — เกณฑ์คัดออกคือเหตุผล <b>เพิ่มเติม</b> ที่ทำให้คนที่ผ่านเกณฑ์คัดเข้าแล้ว ยังไม่ควรเข้าร่วม เช่น มีภาวะที่รบกวนผลหรือเป็นอันตราย" }
+        ]
+      },
+      during:[
+        { type:"lead", t:"การออกแบบการวิจัยคือการตัดสินใจว่าจะตอบคำถามด้วยวิธีใด เลือก design ตามชนิดคำถาม แล้วจึงกำหนดประชากร วิธีเลือกตัวอย่าง และขนาดกลุ่มตัวอย่างให้สอดคล้องกัน" },
+        { type:"concept-grid", title:"3 กระบวนทัศน์หลัก", items:[
+          { ic:"📊", h:"เชิงปริมาณ", en:"Quantitative", p:"วัดเป็นตัวเลข ทดสอบสมมติฐาน เน้นความเป็นปรนัยและการควบคุม ตอบ “เท่าไร/ต่างไหม/มีผลไหม” กลุ่มใหญ่ สรุปอ้างอิงสู่ประชากร" },
+          { ic:"💬", h:"เชิงคุณภาพ", en:"Qualitative", p:"เข้าใจความหมาย ประสบการณ์ บริบท ข้อมูลคำพูด/สังเกต ตอบ “อย่างไร/ทำไม” กลุ่มเล็ก เลือกเจาะจง เน้นความลึกจนอิ่มตัว" },
+          { ic:"🔀", h:"แบบผสานวิธี", en:"Mixed Methods", p:"รวมจุดแข็งทั้งสอง เช่น explanatory sequential (ปริมาณก่อน → คุณภาพอธิบายผล) ต้องวางแผนการบูรณาการตั้งแต่ออกแบบ" }
+        ]},
+        { type:"two-col", title:"แบบการวิจัยเชิงปริมาณ", cols:[
+          { h:"ไม่ทดลอง (Non-experimental)", p:"ไม่มีการจัดกระทำ สังเกต/วัดตามธรรมชาติ · <b>เชิงพรรณนา</b> อธิบายสถานการณ์ · <b>เชิงความสัมพันธ์</b> ศึกษาความสัมพันธ์/ทำนาย · <b>ภาคตัดขวาง</b> ณ จุดเวลาเดียว · <b>ระยะยาว/Cohort</b> ติดตามไปข้างหน้า · <b>ย้อนหลัง/Case-control</b> เริ่มจากผลสืบหาเหตุ" },
+          { h:"ทดลอง (Experimental)", p:"มีการจัดกระทำเพื่อทดสอบเหตุ-ผล · <b>True/RCT</b> ครบ 3: จัดกระทำ + กลุ่มควบคุม + สุ่มเข้ากลุ่ม · <b>Quasi</b> มีจัดกระทำ แต่ขาดสุ่มหรือกลุ่มควบคุม (พบบ่อยสุดในงานพยาบาลไทย) · <b>Pre-experimental</b> เช่น one-group pretest-posttest น่าเชื่อถือเชิงสาเหตุต่ำ" }
+        ]},
+        { type:"table", title:"แบบการวิจัยเชิงคุณภาพ", head:["แบบการวิจัย","จุดเน้น","ตัวอย่างหัวข้อ"], rows:[
+          ["<b>Phenomenology</b><br>ปรากฏการณ์วิทยา","เข้าใจ “ประสบการณ์ชีวิต” ตามมุมมองผู้ให้ข้อมูล","ประสบการณ์การเป็นมารดาวัยรุ่นครั้งแรก"],
+          ["<b>Grounded Theory</b><br>ทฤษฎีฐานราก","สร้างทฤษฎี/แบบจำลองอธิบายกระบวนการจากข้อมูล","กระบวนการปรับตัวของครอบครัวผู้ป่วยจิตเวช"],
+          ["<b>Ethnography</b><br>ชาติพันธุ์วรรณนา","เข้าใจวัฒนธรรม ความเชื่อ วิถีปฏิบัติ ผ่านการอยู่ในสนาม","ความเชื่อการอยู่ไฟหลังคลอดในชุมชนอีสาน"],
+          ["<b>Qualitative Descriptive</b><br>พรรณนาเชิงคุณภาพ","บรรยายปรากฏการณ์ตรงไปตรงมา (content analysis)","มุมมองพยาบาลต่ออุปสรรคการใช้แนวปฏิบัติ"]
+        ]},
+        { type:"two-col", title:"การเลือกกลุ่มตัวอย่าง", cols:[
+          { h:"ใช้ความน่าจะเป็น (Probability)", p:"ทุกหน่วยมีโอกาสถูกเลือกที่ทราบค่า ลดอคติ เป็นตัวแทนดี เหมาะเชิงปริมาณ · <b>Simple Random</b> · <b>Systematic</b> (ทุกลำดับที่ k) · <b>Stratified</b> (แบ่งชั้นแล้วสุ่มตามสัดส่วน) · <b>Cluster</b> (สุ่มกลุ่ม) · <b>Multi-stage</b>" },
+          { h:"ไม่ใช้ความน่าจะเป็น (Non-probability)", p:"<b>Convenience</b> เลือกตามสะดวก (ใช้บ่อยแต่เสี่ยงอคติ) · <b>Purposive</b> เลือกผู้รู้เรื่องดีที่สุด (มาตรฐานเชิงคุณภาพ) · <b>Quota</b> กำหนดสัดส่วนล่วงหน้า · <b>Snowball</b> ให้แนะนำต่อ (เหมาะกลุ่มเข้าถึงยาก เช่น ผู้ประสบความรุนแรง)" }
+        ]},
+        { type:"callout", k:"tip", t:"<b>หลักการเลือก:</b> เชิงปริมาณ → เน้นความเป็นตัวแทน (probability ถ้าทำได้) · เชิงคุณภาพ → เน้นความอุดมของข้อมูล (purposive)" },
+        { type:"two-col", title:"การกำหนดขนาดกลุ่มตัวอย่าง", cols:[
+          { h:"เชิงปริมาณ: Power Analysis", p:"α (ระดับนัยสำคัญ มัก .05) · Power 1−β (มัก ≥ .80) · Effect size (จากงานคล้ายกัน/pilot/เกณฑ์ Cohen: d=0.2 เล็ก, 0.5 กลาง, 0.8 ใหญ่) · เครื่องมือ: G*Power, สูตร Cochran, Krejcie & Morgan" },
+          { h:"เชิงคุณภาพ: Data Saturation", p:"เก็บจนไม่พบประเด็นใหม่ มักประมาณ 10–30 ราย ขึ้นกับแบบการวิจัยและความหลากหลายของผู้ให้ข้อมูล" }
+        ]},
+        { type:"callout", k:"warn", t:"<b>อย่าลืมเผื่อ Attrition:</b> งานติดตามระยะยาวควรเพิ่ม 10–20% เช่น คำนวณได้กลุ่มละ 27 ราย เผื่อ dropout 15% → เก็บกลุ่มละ 32 ราย และต้องรายงานวิธีคำนวณทั้งหมดในโครงร่างเสมอ" }
+      ],
+      quiz:[
+        { tag:"Design", llo:"LLO 1.1",
+          stem:"การศึกษาหนึ่งมีกลุ่มทดลองและกลุ่มควบคุม มีการให้โปรแกรม แต่ “ไม่ได้สุ่ม” ผู้เข้าร่วมเข้ากลุ่ม (ใช้กลุ่มที่มีอยู่เดิม) นี่คือ design ใด?",
+          opts:["True Experimental (RCT)","Quasi-experimental","Cross-sectional","Phenomenology"], correct:1,
+          ex:{ right:"ถูกต้อง — มีการจัดกระทำและกลุ่มควบคุม แต่ <b>ขาดการสุ่มเข้ากลุ่ม</b> = กึ่งทดลอง (Quasi-experimental) ซึ่งพบบ่อยที่สุดในงานพยาบาลไทย",
+                miss:"องค์ประกอบครบของ RCT = จัดกระทำ + กลุ่มควบคุม + <b>สุ่มเข้ากลุ่ม</b> เมื่อขาดการสุ่ม → เป็น <b>Quasi-experimental</b>" } },
+        { tag:"Sampling", llo:"LLO 3.1",
+          stem:"การวิจัยเชิงคุณภาพเรื่องประสบการณ์ผู้รอดชีวิตจากความรุนแรงในครอบครัว ควรใช้วิธีเลือกตัวอย่างแบบใดเป็นหลัก?",
+          opts:["Simple Random Sampling","Purposive Sampling","Stratified Random Sampling","Systematic Sampling"], correct:1,
+          ex:{ right:"ถูกต้อง — เชิงคุณภาพเน้น <b>ความอุดมของข้อมูล</b> จึงใช้ Purposive Sampling เลือกผู้ที่ “รู้เรื่องดีที่สุด” ตามเกณฑ์ (อาจเสริม snowball สำหรับกลุ่มเข้าถึงยาก)",
+                miss:"เชิงคุณภาพไม่เน้นการสุ่มแบบความน่าจะเป็น แต่เน้น <b>Purposive</b> — เลือกผู้ให้ข้อมูลที่รู้เรื่องลึกที่สุด" } },
+        { tag:"Sample Size", llo:"LLO 3.1",
+          stem:"Power Analysis คำนวณได้กลุ่มละ 30 ราย เป็นงานติดตาม 6 เดือนคาดว่า dropout 20% ควรเก็บข้อมูลกลุ่มละกี่ราย (ปัดขึ้น)?",
+          opts:["30 ราย","33 ราย","36 ราย","40 ราย"], correct:2,
+          ex:{ right:"ถูกต้อง — เผื่อ dropout 20%: 30 ÷ (1−0.20) = 30 ÷ 0.80 = 37.5 ≈ <b>38 ราย</b>... อย่างน้อย 36 รายขึ้นไปจึงปลอดภัยที่สุดในตัวเลือกนี้ (หลักการคือต้องเผื่อให้เหลือ ≥30 หลัง dropout)",
+                miss:"วิธีคิด: ขนาดที่ต้องเก็บ = ขนาดที่ต้องการ ÷ (1 − อัตรา dropout) = 30 ÷ 0.80 ≈ 38 ดังนั้นต้องเก็บ <b>มากกว่า 30 อย่างชัดเจน</b> — ในตัวเลือกนี้ 36 ใกล้เคียงและปลอดภัยกว่า 33" } },
+        { tag:"Sampling", llo:"LLO 3.1",
+          stem:"การแบ่งประชากรเป็นชั้น (เช่น ครรภ์แรก/ครรภ์หลัง) แล้วสุ่มตามสัดส่วนแต่ละชั้น เรียกว่าวิธีใด?",
+          opts:["Cluster Sampling","Stratified Random Sampling","Convenience Sampling","Quota Sampling"], correct:1,
+          ex:{ right:"ถูกต้อง — <b>Stratified Random Sampling</b> แบ่งชั้นตามลักษณะสำคัญแล้วสุ่มในแต่ละชั้น ช่วยให้กลุ่มตัวอย่างเป็นตัวแทนของทุกชั้น",
+                miss:"Cluster = สุ่มทั้งกลุ่ม · Quota = กำหนดสัดส่วนแต่ไม่สุ่ม · การ “แบ่งชั้นแล้วสุ่ม” = <b>Stratified Random</b>" } },
+        { tag:"Inclusion", llo:"LLO 1.1",
+          stem:"ข้อใดอธิบาย “เกณฑ์คัดออก (exclusion criteria)” ได้ถูกต้องที่สุด?",
+          opts:["คือตรงข้ามของเกณฑ์คัดเข้าเสมอ","คือเหตุผลเพิ่มเติมที่ทำให้คนที่ผ่านเกณฑ์คัดเข้าแล้วยังไม่ควรเข้าร่วม","คือจำนวนคนที่ถอนตัวระหว่างวิจัย","คือเกณฑ์การให้คะแนนเครื่องมือ"], correct:1,
+          ex:{ right:"ถูกต้อง — เกณฑ์คัดออกคือ <b>เหตุผลเพิ่มเติม</b> (เช่น ภาวะที่รบกวนผลหรือเป็นอันตราย) ที่ทำให้คนที่ผ่านเกณฑ์คัดเข้าแล้ว ไม่ควรเข้าร่วม ไม่ใช่แค่ตรงข้ามของคัดเข้า",
+                miss:"ข้อควรระวังสำคัญ: เกณฑ์คัดออก <b>≠ ตรงข้ามของคัดเข้า</b> แต่เป็นเหตุผลเพิ่มเติมที่ทำให้คนที่ผ่านคัดเข้าแล้วยังไม่ควรร่วม" } }
+      ]
+    },
+
+    /* ---------------- 2.6 ---------------- */
+    t26: {
+      ch:"ch2", code:"2.6",
+      title:"เครื่องมือวิจัยและการประเมินคุณภาพ",
+      en:"Research Instruments & Quality",
+      llo:["LLO 3.1","LLO 3.2"], roadmap:5,
+      before:{
+        objectives:[
+          { tag:"LLO 3.1", t:"เลือกและประเมินคุณภาพเครื่องมือวิจัย (ความตรง/ความเที่ยง) ได้" },
+          { tag:"LLO 3.2", t:"เขียนรายละเอียดเครื่องมือในบทที่ 3 ของโครงร่างได้ครบถ้วน" }
+        ],
+        target:"ระบุเครื่องมือทุกชุดใน <b>บทที่ 3 ของโครงร่าง</b> พร้อมค่าความตรง (IOC/CVI) และความเที่ยง (alpha)",
+        warmups:[
+          { q:"เครื่องมือที่ “เที่ยง” (วัดซ้ำได้ผลเดิม) แปลว่า “ตรง” (วัดได้ถูกสิ่ง) ด้วยเสมอไหม?", a:"<b>ไม่เสมอ</b> — เครื่องมืออาจวัดซ้ำได้ค่าเดิมทุกครั้ง (เที่ยง) แต่วัดผิดสิ่งที่ต้องการ (ไม่ตรง) ได้ · ความเที่ยงเป็นเงื่อนไขจำเป็นแต่ไม่เพียงพอของความตรง" },
+          { q:"ถ้าจะนำเครื่องมือภาษาอังกฤษมาใช้กับคนไทย ต้องทำอะไรบ้าง?", a:"ทำ <b>cross-cultural adaptation</b>: แปลไปข้างหน้า → แปลย้อนกลับ (back translation) โดยผู้แปลอิสระ → ผู้เชี่ยวชาญตรวจความเทียบเท่าทางภาษา/วัฒนธรรม → ทดลองใช้ และต้อง <b>ขออนุญาตเจ้าของเครื่องมือ</b> ด้วย" }
+        ]
+      },
+      during:[
+        { type:"lead", t:"เครื่องมือคือสิ่งที่เราใช้เก็บข้อมูล คุณภาพของเครื่องมือ (ความตรง + ความเที่ยง) จึงกำหนดความน่าเชื่อถือของผลทั้งหมด เครื่องมือดีต้องตรงกับนิยามเชิงปฏิบัติการที่เราเขียนไว้ในหัวข้อ 2.2" },
+        { type:"concept-grid", title:"ประเภทของเครื่องมือวิจัย", items:[
+          { ic:"📋", h:"แบบสอบถาม/มาตรวัด", en:"Questionnaire/Scale", p:"วัดความรู้ ทัศนคติ พฤติกรรม เช่น BSES-SF, EPDS — ใช้มากที่สุดในงานพยาบาล" },
+          { ic:"🎤", h:"แบบสัมภาษณ์", en:"Interview Guide", p:"มี/กึ่ง/ไม่มีโครงสร้าง เหมาะเชิงคุณภาพหรือผู้อ่านเขียนจำกัด" },
+          { ic:"👁️", h:"แบบสังเกต", en:"Observation Form", p:"บันทึกพฤติกรรมจริง เช่น ท่าอุ้มลูกดูดนม (LATCH score)" },
+          { ic:"🩺", h:"วัดทางสรีรวิทยา", en:"Physiological", p:"เครื่องวัดความดัน ชั่งน้ำหนัก ค่า lab — ต้อง calibrate" },
+          { ic:"🗂️", h:"ข้อมูลทุติยภูมิ", en:"Existing Records", p:"เวชระเบียน ฐาน 43 แฟ้ม ทะเบียนคลอด — ประหยัด แต่คุมคุณภาพเดิมไม่ได้" },
+          { ic:"📱", h:"เครื่องมือดิจิทัล", en:"Digital/mHealth", p:"แบบสอบถามออนไลน์ log จากแอป wearable devices" }
+        ]},
+        { type:"steps", title:"ใช้เครื่องมือเดิม แปล หรือสร้างใหม่?", items:[
+          { n:1, h:"ใช้เครื่องมือมาตรฐานที่มีอยู่ (แนะนำ ป.โท)", p:"เลือกที่ตรงนิยามเชิงปฏิบัติการ มีค่าความตรง-เที่ยงรายงานไว้ และขออนุญาตเจ้าของเป็นลายลักษณ์อักษรทุกครั้ง" },
+          { n:2, h:"แปลเครื่องมือต่างประเทศ", p:"forward translation → back translation (ผู้แปลอิสระ) → ผู้เชี่ยวชาญตรวจความเทียบเท่า → ทดลองใช้ (Brislin; WHO)" },
+          { n:3, h:"สร้างเครื่องมือใหม่", p:"นิยามมโนทัศน์ → ร่างข้อจากวรรณกรรม → ตรวจความตรงเชิงเนื้อหา → pilot → วิเคราะห์ความเที่ยง (ใช้เวลามาก)" }
+        ]},
+        { type:"callout", k:"warn", t:"<b>ข้อควรจำ:</b> การใช้เครื่องมือผู้อื่นโดยไม่ขออนุญาต = ละเมิดลิขสิทธิ์และจริยธรรมทางวิชาการ — แนบหนังสืออนุญาตในภาคผนวกของโครงร่าง" },
+        { type:"table", title:"ความตรง (Validity): วัดตรงสิ่งที่ต้องการไหม", head:["ชนิด","ตอบคำถาม","วิธีตรวจ/ดัชนี","เกณฑ์"], rows:[
+          ["<b>เชิงเนื้อหา</b><br>Content","ข้อคำถามครอบคลุมมโนทัศน์ครบไหม","ผู้ทรงคุณวุฒิ 3–5 ท่าน → IOC หรือ CVI","IOC ≥ 0.50<br>I-CVI ≥ 0.78, S-CVI ≥ 0.90"],
+          ["<b>เชิงโครงสร้าง</b><br>Construct","สะท้อนโครงสร้างทฤษฎีไหม","Factor analysis (EFA/CFA), known-groups","factor loading & fit ตามเกณฑ์"],
+          ["<b>เชิงเกณฑ์</b><br>Criterion","สัมพันธ์กับเกณฑ์มาตรฐานไหม","เทียบกับ gold standard (concurrent/predictive)","r สูงกับเกณฑ์มาตรฐาน"]
+        ]},
+        { type:"table", title:"ความเที่ยง (Reliability): วัดซ้ำได้ผลคงที่ไหม", head:["ชนิด","ตอบคำถาม","สถิติ","เกณฑ์"], rows:[
+          ["<b>ความสอดคล้องภายใน</b><br>Internal Consistency","ข้อในชุดเดียววัดทางเดียวกันไหม","Cronbach's alpha, KR-20","≥ .70 ยอมรับได้<br>≥ .80 ดี"],
+          ["<b>ความคงที่เมื่อวัดซ้ำ</b><br>Test-Retest","วัด 2 ครั้งห่าง 1–2 สัปดาห์ คงที่ไหม","Pearson's r หรือ ICC","r / ICC ≥ .70"],
+          ["<b>ระหว่างผู้ประเมิน</b><br>Inter-rater","ผู้สังเกต 2 คนตรงกันไหม","Cohen's kappa, ICC","kappa ≥ .60–.80"]
+        ]},
+        { type:"targets", title:"ความตรง vs ความเที่ยง: เปรียบเป้ายิงธนู" },
+        { type:"callout", k:"gold", t:"<b>ความเที่ยงเป็นเงื่อนไขจำเป็นแต่ไม่เพียงพอของความตรง</b> — เครื่องมือที่ตรงต้องเที่ยงด้วยเสมอ แต่เครื่องมือที่เที่ยงอาจไม่ตรงก็ได้" },
+        { type:"callout", k:"tip", t:"<b>Try out:</b> นำเครื่องมือไปทดลองกับกลุ่มที่คล้ายกลุ่มตัวอย่าง ~30 ราย (ไม่ใช่กลุ่มจริง) เพื่อหาค่าความเที่ยงก่อนเก็บข้อมูลจริง · สำหรับ ป.โท อย่างน้อยต้องรายงานความตรงเชิงเนื้อหา (IOC/CVI) ของทุกเครื่องมือ" }
+      ],
+      quiz:[
+        { tag:"Validity vs Reliability", llo:"LLO 3.1",
+          stem:"เครื่องวัดความดันชำรุด อ่านค่าได้สูงกว่าจริง 20 mmHg ทุกครั้งอย่างคงที่ เครื่องนี้มีคุณสมบัติใด?",
+          opts:["ทั้งตรงและเที่ยง","เที่ยงแต่ไม่ตรง","ตรงแต่ไม่เที่ยง","ทั้งไม่ตรงและไม่เที่ยง"], correct:1,
+          ex:{ right:"ถูกต้อง — อ่านค่าคงที่ทุกครั้ง = <b>เที่ยง (reliable)</b> แต่ค่าผิดจากจริง 20 mmHg = <b>ไม่ตรง (not valid)</b> เหมือนยิงธนูเกาะกลุ่มแต่ผิดเป้า",
+                miss:"“คงที่ทุกครั้ง” = เที่ยง · “ผิดจากค่าจริงเสมอ” = ไม่ตรง → <b>เที่ยงแต่ไม่ตรง</b> (นี่คือเหตุผลว่าทำไมเที่ยงไม่ได้แปลว่าตรง)" } },
+        { tag:"Content Validity", llo:"LLO 3.1",
+          stem:"ดัชนีใดใช้ประเมิน “ความตรงเชิงเนื้อหา” จากการให้ผู้ทรงคุณวุฒิประเมินข้อคำถาม?",
+          opts:["Cronbach's alpha","IOC หรือ CVI","Cohen's kappa","Pearson's r"], correct:1,
+          ex:{ right:"ถูกต้อง — <b>IOC (≥0.50) หรือ CVI (I-CVI ≥0.78)</b> ใช้ประเมินความตรงเชิงเนื้อหาจากผู้ทรงคุณวุฒิ ส่วน Cronbach's alpha ใช้วัดความเที่ยง",
+                miss:"Cronbach's alpha = ความเที่ยง · kappa = inter-rater · ความตรงเชิงเนื้อหาจากผู้ทรงคุณวุฒิใช้ <b>IOC/CVI</b>" } },
+        { tag:"Reliability", llo:"LLO 3.1",
+          stem:"ค่าสัมประสิทธิ์แอลฟาของครอนบาคที่ “ยอมรับได้” สำหรับเครื่องมือวิจัยทั่วไป มีค่าเท่าใด?",
+          opts:["≥ .50","≥ .70","≥ .30","≥ .95"], correct:1,
+          ex:{ right:"ถูกต้อง — เกณฑ์ทั่วไปคือ <b>≥ .70 ยอมรับได้</b> และ ≥ .80 ถือว่าดี (โดยเฉพาะเครื่องมือมาตรฐานเดิม)",
+                miss:"เกณฑ์มาตรฐานของ Cronbach's alpha คือ <b>≥ .70 ยอมรับได้, ≥ .80 ดี</b>" } },
+        { tag:"Translation", llo:"LLO 3.1",
+          stem:"ขั้นตอนสำคัญในการแปลเครื่องมือต่างประเทศที่ช่วยตรวจสอบว่าการแปลคงความหมายเดิม คือขั้นตอนใด?",
+          opts:["Pilot study","Back translation (แปลย้อนกลับ)","Factor analysis","Power analysis"], correct:1,
+          ex:{ right:"ถูกต้อง — <b>Back translation</b> (แปลฉบับไทยกลับเป็นภาษาต้นฉบับโดยผู้แปลอิสระ แล้วเทียบ) ช่วยตรวจว่าความหมายไม่เพี้ยน",
+                miss:"กระบวนการ cross-cultural adaptation: forward → <b>back translation</b> → ผู้เชี่ยวชาญตรวจ → pilot · ขั้นที่ตรวจความเทียบเท่าคือ back translation" } },
+        { tag:"Permission", llo:"LLO 3.2",
+          stem:"นักศึกษาจะใช้ BSES-SF ของ Dennis ในงานวิจัย สิ่งใดที่ “ต้องทำ” ด้านจริยธรรมก่อนใช้?",
+          opts:["แปลเป็นภาษาไทยเองโดยไม่ต้องบอกใคร","ขออนุญาตเจ้าของเครื่องมือเป็นลายลักษณ์อักษร","เปลี่ยนชื่อเครื่องมือเป็นของตนเอง","ลดจำนวนข้อให้เหลือครึ่งหนึ่ง"], correct:1,
+          ex:{ right:"ถูกต้อง — ต้อง <b>ขออนุญาตเจ้าของเครื่องมือเป็นลายลักษณ์อักษร</b> และแนบหนังสืออนุญาตในภาคผนวก การใช้โดยไม่ขอ = ละเมิดลิขสิทธิ์และจริยธรรม",
+                miss:"การใช้เครื่องมือผู้อื่นต้อง <b>ขออนุญาตเป็นลายลักษณ์อักษร</b> เสมอ และแนบหลักฐานในโครงร่าง" } }
+      ]
+    },
+
+    /* ---------------- 2.7 ---------------- */
+    t27: {
+      ch:"ch2", code:"2.7",
+      title:"การเก็บรวบรวมข้อมูล",
+      en:"Data Collection",
+      llo:["LLO 3.1","LLO 3.2"], roadmap:5,
+      before:{
+        objectives:[
+          { tag:"LLO 3.1", t:"เลือกวิธีเก็บข้อมูลที่เหมาะกับ design และกลุ่มตัวอย่างได้" },
+          { tag:"LLO 3.2", t:"วางขั้นตอนการเก็บข้อมูลที่ถูกต้องตามจริยธรรมในโครงร่างได้" }
+        ],
+        target:"เขียนขั้นตอน <b>การเก็บรวบรวมข้อมูลและการพิทักษ์สิทธิ์</b> ในบทที่ 3 ของโครงร่าง",
+        warmups:[
+          { q:"นักวิจัยเริ่มเก็บข้อมูลได้ตั้งแต่เมื่อไหร่? เก็บก่อนผ่านจริยธรรมได้ไหม?", a:"<b>ห้ามเด็ดขาด</b> — ต้องได้รับอนุมัติจากคณะกรรมการจริยธรรม (IRB/EC) <b>ก่อน</b> เริ่มเก็บข้อมูลทุกกรณี ข้อมูลที่เก็บก่อนอนุมัติใช้ไม่ได้และผิดจริยธรรม" },
+          { q:"พยาบาลเก็บข้อมูลวิจัยจากผู้ป่วยของตนเองมีปัญหาอะไร?", a:"<b>ความสัมพันธ์เชิงอำนาจ</b> — ผู้ป่วยอาจรู้สึกจำใจตอบเพราะกลัวกระทบการรักษา ทางแก้คือใช้ผู้ช่วยวิจัยที่เป็นกลางในการเก็บข้อมูล" }
+        ]
+      },
+      during:[
+        { type:"lead", t:"การเก็บข้อมูลที่ดีต้องเป็นระบบ เป็นไปตามจริยธรรม และควบคุมคุณภาพระหว่างทาง เครื่องมือดีแค่ไหน ถ้าเก็บข้อมูลไม่เป็นระบบ ผลก็เชื่อถือไม่ได้" },
+        { type:"two-col", title:"วิธีเก็บข้อมูล", cols:[
+          { h:"เชิงปริมาณ", p:"<b>แบบสอบถามตอบเอง</b> ประหยัด ได้จำนวนมาก แต่เสี่ยงตอบไม่ครบ · <b>สัมภาษณ์มีโครงสร้าง</b> ลด missing เหมาะผู้อ่านเขียนจำกัด แต่เสี่ยง social desirability · <b>สังเกตมีโครงสร้าง</b> เช่น LATCH ต้องฝึกผู้สังเกต+inter-rater · <b>วัดทางสรีรวิทยา</b> แม่นยำ ต้อง calibrate · <b>ข้อมูลทุติยภูมิ</b> เร็วประหยัด แต่อาจไม่ครบ" },
+          { h:"เชิงคุณภาพ", p:"<b>สัมภาษณ์เชิงลึก</b> 45–90 นาที เหมาะประเด็นอ่อนไหว · <b>สนทนากลุ่ม (FGD)</b> 6–10 คน ได้ปฏิสัมพันธ์ แต่ไม่เหมาะเรื่องอ่อนไหว · <b>สังเกตแบบมี/ไม่มีส่วนร่วม</b> ผ่าน field notes · <b>เอกสารและบันทึก</b> ใช้ประกอบ triangulation · เก็บจนข้อมูล <b>อิ่มตัว</b> และถอดเทปแบบคำต่อคำ" }
+        ]},
+        { type:"steps", title:"6 ขั้นตอนการเก็บข้อมูลอย่างเป็นระบบ", items:[
+          { n:1, h:"ขอจริยธรรมการวิจัย", p:"เสนอโครงร่างต่อ IRB/EC — ห้ามเก็บข้อมูลก่อนได้รับอนุมัติเด็ดขาด" },
+          { n:2, h:"ขออนุญาตหน่วยงาน", p:"ทำหนังสือถึงผู้อำนวยการ รพ./หน่วยงาน พร้อมแนบเอกสารรับรองจริยธรรม" },
+          { n:3, h:"เข้าถึงและคัดเลือกกลุ่มตัวอย่าง", p:"ประสาน gatekeeper คัดกรองตามเกณฑ์คัดเข้า–คัดออก" },
+          { n:4, h:"ขอความยินยอม", p:"อธิบายข้อมูลโครงการ ให้เวลาตัดสินใจ ลงนาม informed consent ก่อนเก็บทุกราย" },
+          { n:5, h:"เก็บข้อมูลตามแผน", p:"ปฏิบัติตาม protocol เดียวกันทุกราย บันทึกเหตุผิดปกติ ตรวจครบถ้วนทันที" },
+          { n:6, h:"จัดเก็บอย่างปลอดภัย", p:"แยกเอกสารระบุตัวตนออกจากข้อมูล ใส่รหัส (ID code) เก็บในที่ล็อก/ไฟล์เข้ารหัส" }
+        ]},
+        { type:"concept-grid", title:"จริยธรรมในการเก็บข้อมูล", items:[
+          { ic:"✍️", h:"Informed Consent", en:"ความยินยอม", p:"สมัครใจ ถอนตัวได้ทุกเมื่อโดยไม่กระทบการรักษา" },
+          { ic:"🔒", h:"Confidentiality / Anonymity", en:"ความลับ", p:"Confidentiality = รู้ว่าใครตอบแต่ไม่เปิดเผย · Anonymity = ไม่รู้เลยว่าใครตอบ" },
+          { ic:"🛡️", h:"Beneficence", en:"ประโยชน์/ไม่ก่ออันตราย", p:"มีแผนรองรับเมื่อผู้ให้ข้อมูลเครียดหรือเปิดเผยความเสี่ยง" }
+        ]},
+        { type:"callout", k:"warn", t:"<b>กลุ่มเปราะบาง (Vulnerable):</b> หญิงตั้งครรภ์/หลังคลอด เด็ก ผู้ป่วยวิกฤต ผู้มีปัญหาสุขภาพจิต — IRB พิจารณาเข้มข้นเป็นพิเศษ · ผู้เยาว์ (<20 ปี ในการวิจัย) ต้องได้ความยินยอมจากผู้ปกครอง + assent จากผู้เยาว์ · ระวังความสัมพันธ์เชิงอำนาจ — ใช้ผู้ช่วยวิจัยที่เป็นกลาง" },
+        { type:"two-col", title:"การเก็บข้อมูลดิจิทัล", cols:[
+          { h:"โอกาส", p:"แบบสอบถามออนไลน์ (Google Forms, REDCap) บังคับตอบครบ ลด missing · log จากแอป mHealth ได้ข้อมูล real-time ลด recall bias · สัมภาษณ์ทางไกลเมื่อกลุ่มอยู่ไกล" },
+          { h:"ข้อควรระวัง", p:"<b>Selection bias</b> เข้าถึงเฉพาะผู้มีสมาร์ตโฟน/เน็ต กลุ่มเปราะบางอาจหลุด · <b>ยืนยันตัวตนไม่ได้เต็มที่</b> ใช้คำถามคัดกรอง · <b>ความปลอดภัยข้อมูล</b> เลือกแพลตฟอร์มเข้ารหัส แจ้งใน consent (เชื่อม PDPA หัวข้อ 2.9)" }
+        ]},
+        { type:"callout", k:"tip", t:"<b>ควบคุมคุณภาพระหว่างเก็บ:</b> ฝึก RA + ทดสอบ inter-rater ก่อนเริ่ม · pilot study · ตรวจครบถ้วนทันทีก่อนผู้ตอบกลับ · ติดตาม response rate (flow diagram) · บันทึก log book เป็น audit trail" }
+      ],
+      quiz:[
+        { tag:"Ethics", llo:"LLO 3.2",
+          stem:"นักศึกษาตื่นเต้นมากและเริ่มแจกแบบสอบถามให้มารดาหลังคลอดทันทีหลังเขียนโครงร่างเสร็จ ก่อนยื่น IRB สิ่งนี้ผิดอย่างไร?",
+          opts:["ไม่ผิด ถ้าได้รับอนุญาตจากหอผู้ป่วยแล้ว","ผิด เพราะห้ามเก็บข้อมูลก่อนได้รับอนุมัติจริยธรรม (IRB/EC)","ผิด เพราะแบบสอบถามยังไม่สวย","ไม่ผิด ถ้ามารดายินยอม"], correct:1,
+          ex:{ right:"ถูกต้อง — <b>ห้ามเก็บข้อมูลก่อนได้รับอนุมัติจาก IRB/EC เด็ดขาด</b> ข้อมูลที่เก็บก่อนอนุมัติใช้ไม่ได้และเป็นการละเมิดจริยธรรมการวิจัย",
+                miss:"กฎเหล็กของการวิจัยในมนุษย์: <b>ต้องผ่าน IRB ก่อนเก็บข้อมูลทุกกรณี</b> แม้ผู้เข้าร่วมยินยอมหรือหน่วยงานอนุญาตก็ตาม" } },
+        { tag:"Confidentiality", llo:"LLO 3.2",
+          stem:"การเก็บข้อมูลแบบที่ผู้วิจัย “ไม่ทราบเลย” ว่าใครเป็นผู้ตอบ (เช่น แบบสอบถามออนไลน์ไม่เก็บข้อมูลระบุตัว) เรียกว่าอะไร?",
+          opts:["Confidentiality (การรักษาความลับ)","Anonymity (การไม่ระบุตัวตน)","Informed consent","Beneficence"], correct:1,
+          ex:{ right:"ถูกต้อง — <b>Anonymity</b> คือผู้วิจัยไม่ทราบเลยว่าใครตอบ ต่างจาก Confidentiality ที่รู้ว่าใครตอบแต่ไม่เปิดเผย",
+                miss:"แยกให้ชัด: <b>Anonymity</b> = ไม่รู้เลยว่าใครตอบ · <b>Confidentiality</b> = รู้ว่าใครตอบแต่เก็บเป็นความลับ" } },
+        { tag:"Vulnerable", llo:"LLO 3.2",
+          stem:"การวิจัยในผู้เยาว์ (อายุต่ำกว่า 20 ปีในบริบทการวิจัย) ต้องได้รับสิ่งใด?",
+          opts:["ความยินยอมจากผู้เยาว์เพียงอย่างเดียว","ความยินยอมจากผู้ปกครอง + assent จากผู้เยาว์","ความยินยอมจากผู้ปกครองเพียงอย่างเดียว","ไม่ต้องขอความยินยอมเพราะเป็นผู้เยาว์"], correct:1,
+          ex:{ right:"ถูกต้อง — ต้องได้ <b>ทั้งความยินยอมจากผู้ปกครอง (consent) และ assent จากตัวผู้เยาว์เอง</b> เพื่อเคารพทั้งสิทธิ์ตามกฎหมายและความสมัครใจของเด็ก",
+                miss:"ผู้เยาว์เป็นกลุ่มเปราะบาง ต้องได้ <b>consent จากผู้ปกครอง + assent จากผู้เยาว์</b> ทั้งสองอย่าง" } },
+        { tag:"Power", llo:"LLO 3.2",
+          stem:"เพื่อลดปัญหา “ความสัมพันธ์เชิงอำนาจ” เมื่อพยาบาลจะเก็บข้อมูลจากผู้ป่วยของตน ควรทำอย่างไร?",
+          opts:["บอกผู้ป่วยว่าต้องตอบเพื่อการรักษาที่ดี","ใช้ผู้ช่วยวิจัยที่เป็นกลางในการเก็บข้อมูล","เก็บข้อมูลขณะทำหัตถการ","ให้ผู้ป่วยตอบต่อหน้าพยาบาลเจ้าของไข้"], correct:1,
+          ex:{ right:"ถูกต้อง — ใช้ <b>ผู้ช่วยวิจัยที่เป็นกลาง</b> ช่วยให้ผู้ป่วยรู้สึกอิสระที่จะปฏิเสธหรือถอนตัวโดยไม่กลัวกระทบการรักษา",
+                miss:"ปัญหาคือผู้ป่วยอาจจำใจตอบเพราะกลัวกระทบการรักษา ทางแก้คือ <b>ใช้ผู้เก็บข้อมูลที่เป็นกลาง</b> ไม่ใช่พยาบาลเจ้าของไข้" } }
+      ]
+    },
+
+    /* ---------------- 2.8 ---------------- */
+    t28: {
+      ch:"ch2", code:"2.8",
+      title:"การวิเคราะห์ข้อมูล",
+      en:"Data Analysis",
+      llo:["LLO 3.1","LLO 3.2"], roadmap:6,
+      before:{
+        objectives:[
+          { tag:"LLO 3.1", t:"เลือกสถิติให้ตรงกับคำถามวิจัยและระดับการวัดได้" },
+          { tag:"LLO 3.2", t:"แปลผล p-value, CI และ effect size และวางแผนวิเคราะห์ในโครงร่างได้" }
+        ],
+        target:"จับคู่สถิติกับวัตถุประสงค์/สมมติฐานรายข้อใน <b>แผนการวิเคราะห์ข้อมูล</b> ของบทที่ 3",
+        warmups:[
+          { q:"p < .05 แปลว่าผลการวิจัย “สำคัญทางคลินิก” เสมอไหม?", a:"<b>ไม่เสมอ</b> — p บอกแค่ว่ามีนัยสำคัญทางสถิติ ไม่ได้บอกขนาดของผลหรือความสำคัญทางคลินิก · กลุ่มตัวอย่างใหญ่ทำให้ p เล็กได้แม้ผลต่างนิดเดียว ต้องดู effect size และ CI ประกอบ" },
+          { q:"ถ้าจะเปรียบเทียบคะแนน “ก่อน-หลัง” ในคนกลุ่มเดิม ใช้สถิติตัวเดียวกับเปรียบเทียบ “สองกลุ่มที่ต่างคน” ไหม?", a:"<b>ไม่</b> — ก่อน-หลังในคนเดิม (กลุ่มสัมพันธ์) ใช้ <b>Paired t-test</b> ส่วนสองกลุ่มต่างคน (กลุ่มอิสระ) ใช้ <b>Independent t-test</b> — โครงสร้างข้อมูลต่างกัน สถิติต่างกัน" }
+        ]
+      },
+      during:[
+        { type:"lead", t:"การเลือกสถิติไม่ใช่เรื่องของการท่องจำ แต่เป็นตรรกะที่ไหลจากคำถามวิจัย ระดับการวัด จำนวนกลุ่ม และข้อตกลงเบื้องต้น เก็บข้อมูลดีแค่ไหน ถ้าวิเคราะห์ผิดสถิติ ผลก็เชื่อถือไม่ได้" },
+        { type:"two-col", title:"สถิติเชิงพรรณนา vs เชิงอนุมาน", cols:[
+          { h:"เชิงพรรณนา (Descriptive)", p:"บรรยายลักษณะข้อมูลของกลุ่มตัวอย่างที่เก็บมา — ความถี่ ร้อยละ ค่าเฉลี่ย SD มัธยฐาน พิสัย · ใช้ตอบวัตถุประสงค์เชิงพรรณนาและนำเสนอข้อมูลทั่วไป (ตารางที่ 1 ของทุกงานวิจัย)" },
+          { h:"เชิงอนุมาน (Inferential)", p:"สรุปอ้างอิงจากกลุ่มตัวอย่างไปยังประชากร — ทดสอบสมมติฐาน เปรียบเทียบ หาความสัมพันธ์ ทำนาย · เช่น t-test, ANOVA, chi-square, correlation, regression" }
+        ]},
+        { type:"table", title:"เลือกสถิติพรรณนาตามระดับการวัด", head:["ระดับการวัด","สถิติที่เหมาะ","ตัวอย่างการรายงาน"], rows:[
+          ["Nominal","ความถี่ (n), ร้อยละ (%)","คลอดปกติ ร้อยละ 62.5 (n=50)"],
+          ["Ordinal","ความถี่ ร้อยละ มัธยฐาน IQR","ความปวด Mdn 6 (IQR 4–8)"],
+          ["Interval/Ratio (ปกติ)","ค่าเฉลี่ย M, SD","สมรรถนะเฉลี่ย 52.4 (SD 8.1)"],
+          ["Interval/Ratio (เบ้)","มัธยฐาน Mdn, IQR","ระยะให้นม Mdn 14 สัปดาห์ (IQR 6–22)"]
+        ]},
+        { type:"steps", title:"ตรรกะการเลือกสถิติ: ถาม 4 คำถาม", items:[
+          { n:1, h:"คำถามวิจัยถามอะไร?", p:"เปรียบเทียบความต่าง · หาความสัมพันธ์ · ทำนาย — ชนิดคำถามกำหนดตระกูลสถิติ" },
+          { n:2, h:"ตัวแปรตามวัดระดับใด?", p:"Nominal/Ordinal → nonparametric/chi-square · Interval/Ratio → มีโอกาสใช้ parametric" },
+          { n:3, h:"กี่กลุ่ม สัมพันธ์กันไหม?", p:"2 กลุ่มอิสระ vs 2 กลุ่มสัมพันธ์ (วัดซ้ำคนเดิม) vs ≥3 กลุ่ม — เลือกสถิติคนละตัว" },
+          { n:4, h:"ข้อตกลงเบื้องต้นผ่านไหม?", p:"การแจกแจงปกติ ความแปรปรวนเท่ากัน ขนาดพอ — ถ้าไม่ผ่านใช้ nonparametric" }
+        ]},
+        { type:"table", title:"ตารางจับคู่สถิติที่ใช้บ่อย", head:["วัตถุประสงค์","Parametric","Nonparametric"], rows:[
+          ["เปรียบเทียบ 2 กลุ่มอิสระ (ทดลอง vs ควบคุม)","Independent t-test","Mann-Whitney U"],
+          ["เปรียบเทียบ 2 ครั้งในกลุ่มเดิม (ก่อน-หลัง)","Paired t-test","Wilcoxon signed-rank"],
+          ["เปรียบเทียบ ≥3 กลุ่ม/ครั้ง","One-way / Repeated ANOVA","Kruskal-Wallis / Friedman"],
+          ["ความสัมพันธ์ตัวแปรจัดกลุ่ม","—","Chi-square / Fisher's exact"],
+          ["ความสัมพันธ์ตัวแปรต่อเนื่อง","Pearson's r","Spearman's rho"],
+          ["ทำนายตัวแปรตาม","Multiple / Logistic regression","—"]
+        ]},
+        { type:"callout", k:"tip", t:"<b>ตารางนี้คือ “แผนที่”</b> สำหรับเขียนแผนการวิเคราะห์ในโครงร่าง — จับคู่สมมติฐานแต่ละข้อกับสถิติหนึ่งแถว และต้องระบุไว้ตั้งแต่ขั้นโครงร่าง ไม่ใช่เลือกหลังเก็บข้อมูลเสร็จ" },
+        { type:"concept-grid", title:"การแปลผล 3 ค่าที่ต้องรายงานคู่กัน", items:[
+          { ic:"📍", h:"p-value", en:"นัยสำคัญทางสถิติ", p:"ความน่าจะเป็นที่จะพบผลนี้ถ้า H₀ จริง · p<.05 ปฏิเสธ H₀ ได้ แต่ไม่บอกขนาดผล" },
+          { ic:"📏", h:"95% CI", en:"ช่วงเชื่อมั่น", p:"ช่วงค่าที่เชื่อว่าครอบคลุมค่าจริงของประชากร · แคบ=แม่นยำ · คร่อม 0/1 = ไม่มีนัยสำคัญ" },
+          { ic:"💪", h:"Effect Size", en:"ขนาดอิทธิพล", p:"ขนาดของผล ไม่ขึ้นกับ n · Cohen's d (0.2 เล็ก/0.5 กลาง/0.8 ใหญ่), r, OR" }
+        ]},
+        { type:"callout", k:"warn", t:"<b>นัยสำคัญทางสถิติ ≠ นัยสำคัญทางคลินิก:</b> n ใหญ่ทำให้ p เล็กได้แม้ผลต่างนิดเดียว — รายงาน effect size และ CI ควบคู่เสมอ" },
+        { type:"callout", k:"gold", t:"<b>เชิงคุณภาพ:</b> Thematic Analysis 6 ขั้น (Braun & Clarke) — คุ้นเคยข้อมูล → สร้างรหัส → ค้นหา theme → ทบทวน → นิยาม/ตั้งชื่อ → เขียนรายงานพร้อม quotes · หรือ Content Analysis: แตกเป็น meaning units → ย่อ → ให้รหัส → จัดหมวดหมู่ · เครื่องมือ: NVivo, ATLAS.ti, Taguette (ฟรี) — แต่ “การตีความเป็นหน้าที่ของผู้วิจัย”" }
+      ],
+      quiz:[
+        { tag:"Statistics", llo:"LLO 3.1",
+          stem:"ต้องการเปรียบเทียบคะแนนความวิตกกังวล “ก่อนและหลัง” การให้โปรแกรมในผู้ป่วยกลุ่มเดียวกัน (ข้อมูลแจกแจงปกติ) ควรใช้สถิติใด?",
+          opts:["Independent t-test","Paired t-test","Chi-square","Pearson's correlation"], correct:1,
+          ex:{ right:"ถูกต้อง — วัดซ้ำในคนกลุ่มเดิม (ก่อน-หลัง) คือข้อมูล “สัมพันธ์กัน” + แจกแจงปกติ → <b>Paired t-test</b>",
+                miss:"กุญแจคือ “คนกลุ่มเดิม วัดสองครั้ง” = ข้อมูลสัมพันธ์ → <b>Paired t-test</b> (Independent t-test ใช้กับสองกลุ่มต่างคน)" } },
+        { tag:"Statistics", llo:"LLO 3.1",
+          stem:"ต้องการเปรียบเทียบ “สัดส่วนการเลี้ยงลูกด้วยนมแม่ (เลี้ยง/ไม่เลี้ยง)” ระหว่างกลุ่มทดลองและกลุ่มควบคุม ตัวแปรตามเป็น nominal ควรใช้สถิติใด?",
+          opts:["Independent t-test","Chi-square","Pearson's r","ANOVA"], correct:1,
+          ex:{ right:"ถูกต้อง — ตัวแปรตามเป็น nominal (เลี้ยง/ไม่เลี้ยง) เปรียบเทียบสัดส่วนระหว่างกลุ่ม → <b>Chi-square</b> (หรือ Fisher's exact ถ้าความถี่น้อย)",
+                miss:"ตัวแปรตามเป็นข้อมูลจัดกลุ่ม (nominal) ไม่ใช่คะแนนต่อเนื่อง → ใช้ <b>Chi-square</b> ไม่ใช่ t-test" } },
+        { tag:"Interpretation", llo:"LLO 3.2",
+          stem:"ผลการวิจัยได้ p = .001 แต่ Cohen's d = 0.10 (ขนาดผลเล็กมาก) ในกลุ่มตัวอย่าง 2,000 คน ควรสรุปอย่างไร?",
+          opts:["ผลสำคัญมากทั้งทางสถิติและคลินิก","มีนัยสำคัญทางสถิติ แต่ขนาดผลเล็ก อาจไม่สำคัญทางคลินิก","ผลไม่มีนัยสำคัญ","ต้องเก็บข้อมูลเพิ่ม"], correct:1,
+          ex:{ right:"ถูกต้อง — n ใหญ่ทำให้ p เล็กได้แม้ผลต่างจริงน้อยมาก (d=0.10) จึง <b>มีนัยสำคัญทางสถิติแต่ขนาดผลเล็ก อาจไม่สำคัญทางคลินิก</b> นี่คือเหตุผลที่ต้องรายงาน effect size",
+                miss:"บทเรียนสำคัญ: <b>นัยสำคัญทางสถิติ ≠ นัยสำคัญทางคลินิก</b> · p เล็กจาก n ใหญ่ แต่ d=0.10 บอกว่าผลจริงเล็กมาก" } },
+        { tag:"Descriptive", llo:"LLO 3.1",
+          stem:"ข้อมูล “ระยะเวลาเลี้ยงลูกด้วยนมแม่” มีการแจกแจงเบ้ (skewed) ควรรายงานด้วยสถิติพรรณนาใด?",
+          opts:["ค่าเฉลี่ยและ SD","มัธยฐานและ IQR","ความถี่และร้อยละ","Cronbach's alpha"], correct:1,
+          ex:{ right:"ถูกต้อง — ข้อมูลต่อเนื่องที่ <b>แจกแจงเบ้</b> ควรใช้ <b>มัธยฐาน (Mdn) และ IQR</b> เพราะค่าเฉลี่ยจะถูกดึงโดยค่าสุดขั้ว",
+                miss:"หลักจำ: ข้อมูลต่อเนื่องปกติ → M, SD · ข้อมูลต่อเนื่อง <b>เบ้</b> → <b>Mdn, IQR</b> (ค่าเฉลี่ยไม่เหมาะกับข้อมูลเบ้)" } },
+        { tag:"Qualitative", llo:"LLO 3.1",
+          stem:"Thematic Analysis 6 ขั้นตอนของ Braun & Clarke ขั้นตอนแรกสุดคืออะไร?",
+          opts:["สร้างรหัสเริ่มต้น (initial codes)","ทำความคุ้นเคยกับข้อมูล (อ่านซ้ำหลายรอบ)","เขียนรายงาน","ค้นหาแก่นสาระ (themes)"], correct:1,
+          ex:{ right:"ถูกต้อง — ขั้นแรกคือ <b>ทำความคุ้นเคยกับข้อมูล</b> (familiarization) อ่านบทถอดเทปซ้ำหลายรอบ จดความคิดแรก ก่อนจึงสร้างรหัส",
+                miss:"ลำดับคือ: <b>คุ้นเคยข้อมูล</b> → สร้างรหัส → ค้นหา theme → ทบทวน → นิยาม → เขียนรายงาน · เริ่มที่การอ่านซ้ำให้คุ้นเคยก่อน" } }
+      ]
+    },
+
+    /* ---------------- 2.9 ---------------- */
+    t29: {
+      ch:"ch2", code:"2.9",
+      title:"การจัดการข้อมูลและการตรวจสอบคุณภาพ",
+      en:"Data Management & Quality Assurance",
+      llo:["LLO 3.2","LLO 4.1"], roadmap:6,
+      before:{
+        objectives:[
+          { tag:"LLO 3.2", t:"วางแผนการจัดการข้อมูล การทำความสะอาด และความปลอดภัยตาม PDPA ได้" },
+          { tag:"LLO 4.1", t:"ออกแบบการตรวจสอบคุณภาพงานวิจัยทั้งเชิงปริมาณและคุณภาพได้" }
+        ],
+        target:"ใช้ <b>checklist บทที่ 3</b> ตรวจความสมบูรณ์ของโครงร่างการวิจัย (รายงานฉบับที่ 3) ก่อนส่ง",
+        warmups:[
+          { q:"พบข้อมูล outlier ที่ทำให้ผลวิจัย “ไม่สวย” ลบทิ้งเลยได้ไหม?", a:"<b>ห้าม</b>ลบเพียงเพราะทำให้ผลไม่สวย — ต้องตัดสินใจอย่างโปร่งใส: ตรวจว่าเป็นค่าผิดจากการคีย์ (แก้กลับต้นฉบับ) หรือค่าจริงสุดขั้ว (อาจวิเคราะห์ทั้งมีและไม่มี = sensitivity analysis) และบันทึกทุกการแก้ไขลง log" },
+          { q:"ข้อมูลสุขภาพของผู้ป่วยจัดเป็นข้อมูลประเภทใดตาม PDPA?", a:"เป็น <b>“ข้อมูลอ่อนไหว” (sensitive data)</b> ตาม พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 ต้องได้รับความยินยอมชัดแจ้ง ใช้ตามวัตถุประสงค์ที่แจ้ง และมีมาตรการรักษาความปลอดภัยที่เหมาะสม" }
+        ]
+      },
+      during:[
+        { type:"lead", t:"ข้อมูลที่เก็บมาต้องจัดการอย่างเป็นระบบ ทำความสะอาดอย่างโปร่งใส ปกป้องตาม PDPA และตรวจสอบคุณภาพ — นี่คือขั้นตอนสุดท้ายที่ทำให้งานวิจัยน่าเชื่อถือและพร้อมเผยแพร่" },
+        { type:"steps", title:"การลงรหัสและบันทึกข้อมูล", items:[
+          { n:1, h:"สร้างสมุดรหัส (Codebook)", p:"กำหนดชื่อตัวแปร ค่ารหัส ความหมาย ก่อนเก็บข้อมูล เช่น SEX: 1=หญิง 2=ชาย · รหัสค่าสูญหาย เช่น 99 — ทุกคนในทีมใช้ชุดเดียวกัน" },
+          { n:2, h:"กำหนดรหัสประจำราย (ID Code)", p:"ทุกชุดข้อมูลมี ID ไม่ซ้ำ แยกจากชื่อ-สกุล เก็บไฟล์เชื่อม ID กับตัวตนแยกต่างหาก จำกัดผู้เข้าถึง" },
+          { n:3, h:"บันทึกข้อมูลอย่างเป็นระบบ", p:"ลงข้อมูลทันทีหลังเก็บ ใช้ template เดียวกัน · ฟอร์มออนไลน์ (REDCap/Google Forms) ลดความผิดพลาดจากการคีย์" },
+          { n:4, h:"ตรวจทานการบันทึก (Verification)", p:"สุ่มตรวจ 10–20% เทียบเอกสารต้นฉบับ หรือ double data entry สำหรับข้อมูลสำคัญ" }
+        ]},
+        { type:"two-col", title:"การทำความสะอาดข้อมูล (Data Cleaning)", cols:[
+          { h:"ข้อมูลสูญหาย (Missing)", p:"สำรวจรูปแบบก่อน: สุ่มหาย หรือหายอย่างมีระบบ · รายงานจำนวน/ร้อยละทุกตัวแปร · จัดการ: ตัดราย (listwise) ถ้าน้อยมาก / แทนค่า (imputation) / multiple imputation · <b>ป้องกันดีกว่าแก้</b> — ตรวจครบถ้วนตั้งแต่หน้างาน" },
+          { h:"ค่าผิดปกติ/นอกพิสัย", p:"<b>Range check</b> ค่าที่เป็นไปไม่ได้ เช่น อายุ 250 ปี (มักคีย์ผิด ตรวจกลับต้นฉบับ) · <b>Outliers</b> ค่าจริงแต่สุดขั้ว ตรวจด้วย boxplot/z-score (±3 SD) · ตัดสินใจโปร่งใส อาจทำ sensitivity analysis · <b>ห้ามลบเพราะทำให้ผลไม่สวย</b> · บันทึกทุกการแก้ลง log ห้ามทับไฟล์ดิบ" }
+        ]},
+        { type:"concept-grid", title:"ความปลอดภัยข้อมูลและ PDPA (พ.ร.บ. 2562)", items:[
+          { ic:"🎭", h:"De-identification", en:"ลดการระบุตัวตน", p:"ใช้ ID แทนชื่อ ลบ/ปกปิดข้อมูลชี้ตัว (ชื่อ HN เบอร์โทร) · ใช้นามสมมติในรายงานเชิงคุณภาพ" },
+          { ic:"🗄️", h:"Storage", en:"การจัดเก็บ", p:"เอกสาร: ตู้ล็อกกุญแจ · ไฟล์: เข้ารหัส/รหัสผ่าน backup ≥2 แหล่ง" },
+          { ic:"🔑", h:"Access Control", en:"การเข้าถึง", p:"กำหนดสิทธิ์รายบุคคล RA เข้าถึงเท่าที่จำเป็น ห้ามส่งผ่านช่องทางไม่ปลอดภัย" },
+          { ic:"🗑️", h:"Retention & Disposal", en:"เก็บรักษาและทำลาย", p:"เก็บตามที่แจ้ง IRB (ทั่วไป 3–5 ปีหลังเผยแพร่) แล้วทำลายปลอดภัย: ย่อยเอกสาร/ลบถาวร" }
+        ]},
+        { type:"callout", k:"warn", t:"<b>PDPA:</b> ข้อมูลสุขภาพเป็น “ข้อมูลอ่อนไหว” ต้องได้รับความยินยอมชัดแจ้ง ใช้ตามวัตถุประสงค์ที่แจ้ง และมีมาตรการรักษาความปลอดภัยที่เหมาะสม" },
+        { type:"two-col", title:"การตรวจสอบคุณภาพงานวิจัย", cols:[
+          { h:"เชิงปริมาณ: ความตรงของการศึกษา", p:"<b>Internal validity</b> ควบคุมตัวแปรแทรกซ้อน ใช้เครื่องมือที่ตรวจคุณภาพแล้ว เก็บตาม protocol เดียวกัน · <b>External validity</b> กลุ่มเป็นตัวแทน อธิบายบริบทชัด · audit ข้อมูล 10–20% เทียบต้นฉบับ + บันทึก deviation" },
+          { h:"เชิงคุณภาพ: Trustworthiness", p:"(Lincoln & Guba) · <b>Credibility</b> member checking, triangulation, peer debriefing · <b>Transferability</b> thick description · <b>Dependability</b> audit trail · <b>Confirmability</b> reflexive journal" }
+        ]}
+      ],
+      quiz:[
+        { tag:"Data Cleaning", llo:"LLO 3.2",
+          stem:"นักวิจัยพบค่า outlier 3 รายที่ทำให้ผลไม่มีนัยสำคัญ และคิดจะลบทิ้งเพื่อให้ผลออกมาสวย ควรทำอย่างไรจึงถูกต้องตามจริยธรรม?",
+          opts:["ลบทิ้งได้เลยเพราะเป็นค่าผิดปกติ","ตรวจสอบที่มา และอาจวิเคราะห์ทั้งมีและไม่มี (sensitivity analysis) อย่างโปร่งใส","เปลี่ยนค่าให้เป็นค่าเฉลี่ย","ไม่ต้องรายงานว่ามี outlier"], correct:1,
+          ex:{ right:"ถูกต้อง — <b>ห้ามลบเพียงเพราะผลไม่สวย</b> ต้องตรวจที่มา (คีย์ผิดหรือค่าจริงสุดขั้ว) และหากเป็นค่าจริง อาจทำ sensitivity analysis (วิเคราะห์ทั้งมีและไม่มี) อย่างโปร่งใส บันทึกทุกการตัดสินใจ",
+                miss:"หลักความซื่อสัตย์ทางวิชาการ: <b>ห้ามลบ outlier เพราะทำให้ผลไม่สวย</b> · ตรวจที่มา + sensitivity analysis + บันทึก log อย่างโปร่งใส" } },
+        { tag:"PDPA", llo:"LLO 3.2",
+          stem:"ตาม พ.ร.บ. PDPA พ.ศ. 2562 ข้อมูลสุขภาพของผู้เข้าร่วมวิจัยจัดเป็นข้อมูลประเภทใด และต้องการอะไรเป็นพิเศษ?",
+          opts:["ข้อมูลทั่วไป ไม่ต้องขอความยินยอม","ข้อมูลอ่อนไหว ต้องได้รับความยินยอมโดยชัดแจ้ง","ข้อมูลสาธารณะ ใช้ได้เสรี","ข้อมูลนิรนาม ไม่อยู่ภายใต้ PDPA"], correct:1,
+          ex:{ right:"ถูกต้อง — ข้อมูลสุขภาพเป็น <b>“ข้อมูลอ่อนไหว” (sensitive data)</b> ต้องได้รับความยินยอม <b>โดยชัดแจ้ง</b> ใช้ตามวัตถุประสงค์ที่แจ้ง และมีมาตรการความปลอดภัยเหมาะสม",
+                miss:"PDPA จัดข้อมูลสุขภาพเป็น <b>ข้อมูลอ่อนไหว</b> ที่ต้องการความยินยอมโดยชัดแจ้งและการคุ้มครองเป็นพิเศษ" } },
+        { tag:"Trustworthiness", llo:"LLO 4.1",
+          stem:"ในงานวิจัยเชิงคุณภาพ การให้ผู้ให้ข้อมูลตรวจสอบยืนยันว่าผู้วิจัยตีความถูกต้อง (member checking) ช่วยเสริมเกณฑ์ใดของ Trustworthiness?",
+          opts:["Transferability","Credibility (ความน่าเชื่อถือ)","Dependability","Confirmability"], correct:1,
+          ex:{ right:"ถูกต้อง — <b>Member checking</b> เป็นเทคนิคเสริม <b>Credibility</b> (ความน่าเชื่อถือของข้อค้นพบ) ร่วมกับ triangulation และ peer debriefing",
+                miss:"Credibility = ข้อค้นพบสะท้อนความจริงของผู้ให้ข้อมูลไหม → เสริมด้วย <b>member checking</b>, triangulation, peer debriefing" } },
+        { tag:"Codebook", llo:"LLO 3.2",
+          stem:"“สมุดรหัส (Codebook)” ควรจัดทำเมื่อใดในกระบวนการวิจัย?",
+          opts:["หลังเก็บข้อมูลเสร็จทั้งหมด","ก่อนเริ่มเก็บข้อมูล","หลังวิเคราะห์ข้อมูล","ขณะเขียนบทที่ 5"], correct:1,
+          ex:{ right:"ถูกต้อง — Codebook ต้องทำ <b>ก่อนเก็บข้อมูล</b> เพื่อให้ทุกคนในทีมลงรหัสด้วยมาตรฐานเดียวกัน ลดความผิดพลาดและความไม่สอดคล้อง",
+                miss:"Codebook กำหนดชื่อตัวแปร/ค่ารหัส/ความหมาย ต้องเตรียม <b>ก่อนเก็บข้อมูล</b> ไม่ใช่หลังเก็บเสร็จ" } }
+      ]
+    }
+  }
+};
+
+</script>
+<script>
+/* ============================================================
+   app.js — เครื่องยนต์แพลตฟอร์มการเรียนรู้
+   ============================================================ */
+
+const state = {
+  view: "home",       // home | topic | locked
+  topicId: null,
+  chId: null,
+  phase: "before",
+  done: {},           // topicId -> true (เมื่อทำ quiz จบ)
+  quiz: { idx: 0, answers: [], topicId: null }
+};
+
+const $ = (s, r=document) => r.querySelector(s);
+const el = (tag, cls, html) => { const e=document.createElement(tag); if(cls)e.className=cls; if(html!=null)e.innerHTML=html; return e; };
+const chById = id => COURSE.chapters.find(c=>c.id===id);
+const topicsOf = ch => (ch.topics||[]).map(t=>COURSE.topics[t]);
+// resolve a topic by its display code (e.g. "2.1") OR its key (e.g. "t21")
+const keyByCode = {};
+Object.keys(COURSE.topics).forEach(k=>{ keyByCode[COURSE.topics[k].code]=k; });
+const topicByCode = code => COURSE.topics[code] || COURSE.topics[keyByCode[code]];
+
+/* ---------------- NAV TREE ---------------- */
+function buildNav(){
+  const tree = $("#navTree");
+  tree.innerHTML = "";
+  COURSE.chapters.forEach(ch=>{
+    const wrap = el("div","nav-chapter");
+    wrap.dataset.ch = ch.id;
+    const locked = ch.status!=="full";
+    const btn = el("button", "nav-ch-btn"+(locked?" locked":""));
+    btn.innerHTML = `<span class="num">${ch.num}</span><span style="text-align:right">${ch.title}</span>`
+      + (locked?`<span class="lockico">🔒</span>`:`<span class="lockico">▾</span>`);
+    btn.onclick = ()=>{
+      if(locked){ openLocked(ch.id); closeMobile(); return; }
+      wrap.classList.toggle("open");
+    };
+    wrap.appendChild(btn);
+
+    if(!locked){
+      const tlist = el("div","nav-topics");
+      topicsOf(ch).forEach(tp=>{
+        const tb = el("button","nav-topic");
+        tb.dataset.topic = tp.code;
+        tb.innerHTML = `<span class="dot"></span><span>${tp.code} ${tp.title}</span>`;
+        tb.onclick = ()=>{ openTopic(tp.code); closeMobile(); };
+        tlist.appendChild(tb);
+      });
+      wrap.appendChild(tlist);
+    }
+    tree.appendChild(wrap);
+  });
+}
+
+function refreshNavState(){
+  document.querySelectorAll(".nav-topic").forEach(b=>{
+    const code=b.dataset.topic;
+    b.classList.toggle("active", state.view==="topic" && state.topicId===code);
+    b.classList.toggle("done", !!state.done[code]);
+  });
+  // open the chapter containing active topic
+  if(state.view==="topic"){
+    const tp=topicByCode(state.topicId);
+    document.querySelectorAll(".nav-chapter").forEach(w=>{
+      if(w.dataset.ch===tp.ch) w.classList.add("open");
+    });
+  }
+}
+
+/* ---------------- PROGRESS ---------------- */
+function updateProgress(){
+  const all = Object.keys(COURSE.topics).length;
+  const fin = Object.values(state.done).filter(Boolean).length;
+  const pct = all? Math.round(fin/all*100):0;
+  $("#progBar").style.width = pct+"%";
+  $("#progLabel").textContent = `ความคืบหน้า ${pct}% · ทำแบบฝึกหัดแล้ว ${fin}/${all} หัวข้อ`;
+}
+
+/* ---------------- HOME ---------------- */
+function openHome(){
+  state.view="home"; state.topicId=null;
+  $("#crumb").innerHTML="<b>หน้าหลัก</b>";
+  const v=$("#view"); v.innerHTML="";
+
+  const hero=el("div","hero");
+  hero.innerHTML=`
+    <div class="hero-eyebrow">รายวิชา 1100500107 · ปีการศึกษา 2569</div>
+    <h1>วิจัยและการใช้หลักฐาน<br>เชิงประจักษ์ทางการพยาบาล</h1>
+    <p class="lede">แพลตฟอร์มเรียนรู้ด้วยตนเอง ออกแบบให้คุณเรียนได้ทุกที่ทุกเวลา — เตรียมตัวก่อนเข้าชั้น เรียนรู้ระหว่างชั้น และทบทวนหลังเรียนด้วยแบบฝึกหัดพร้อมเฉลยอธิบาย</p>
+    <div class="hero-meta">
+      <span class="chip">📚 <b>4</b> บทเรียน</span>
+      <span class="chip">🎯 <b>9</b> หัวข้อย่อย (บทที่ 2)</span>
+      <span class="chip">✍️ <b>เป้าหมาย:</b> โครงร่างการวิจัย (รายงานฉบับที่ 3)</span>
+      <span class="chip">🧭 เรียนรู้ 3 ระยะ: ก่อน–ระหว่าง–หลังเรียน</span>
+    </div>`;
+  v.appendChild(hero);
+
+  const intro=el("div","card");
+  intro.style.marginTop="34px";
+  intro.innerHTML=`
+    <h4><span class="ic">🧭</span>วิธีใช้แพลตฟอร์มนี้</h4>
+    <div class="prose">
+      <p>แต่ละหัวข้อในบทที่ 2 แบ่งการเรียนรู้เป็น <strong>3 ระยะ</strong> เพื่อให้เกิดการเรียนรู้ที่ลึกและต่อเนื่อง:</p>
+    </div>
+    <div class="cgrid" style="margin-top:4px">
+      <div class="ccard"><div class="ic">📖</div><h5>ก่อนเรียน</h5><div class="en-tag">Before Class</div><p>วอร์มอัพกระตุ้นความรู้เดิม + ดูวัตถุประสงค์การเรียนรู้ (LLO) และเป้าหมายงาน</p></div>
+      <div class="ccard"><div class="ic">🔬</div><h5>ระหว่างเรียน</h5><div class="en-tag">During Class</div><p>เนื้อหาเชิงโต้ตอบ ตาราง แผนภาพ ตัวอย่างทางการพยาบาลและผดุงครรภ์</p></div>
+      <div class="ccard"><div class="ic">✅</div><h5>หลังเรียน</h5><div class="en-tag">After Class</div><p>แบบฝึกหัดเชิงความเข้าใจ พร้อมเฉลยอธิบายทุกข้อ และเชื่อมสู่โครงร่างการวิจัย</p></div>
+    </div>`;
+  v.appendChild(intro);
+
+  const h2=el("h2"); h2.style.cssText="font-size:24px;margin:38px 0 16px;font-weight:600"; h2.textContent="บทเรียนทั้งหมด";
+  v.appendChild(h2);
+
+  const grid=el("div","ch-grid");
+  COURSE.chapters.forEach(ch=>{
+    const locked=ch.status!=="full";
+    const card=el("div","ch-card"+(locked?" locked":""));
+    const nTopics = ch.topics? ch.topics.length : (ch.outline?ch.outline.length:0);
+    card.innerHTML=`
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <span class="badge ${locked?'badge-soon':'badge-full'}">${locked?'โครงร่าง · รอเปิด':'เนื้อหาเต็ม'}</span>
+        <div class="big-num">${ch.num}</div>
+      </div>
+      <h3>${ch.title}</h3>
+      <p>${ch.desc}</p>
+      <div class="foot">${locked?`<span style="color:var(--ink-soft)">${ch.teacher}</span>`:`เริ่มเรียน · ${nTopics} หัวข้อ →`}</div>`;
+    card.onclick=()=> locked? openLocked(ch.id) : (openChapterFirst(ch.id));
+    grid.appendChild(card);
+  });
+  v.appendChild(grid);
+
+  const note=el("div","footer-note",`รายวิชาวิจัยและการใช้หลักฐานเชิงประจักษ์ทางการพยาบาล · หลักสูตรพยาบาลศาสตรมหาบัณฑิต · วิทยาลัยพยาบาลบรมราชชนนี ขอนแก่น<br>เนื้อหาบทที่ 2 โดย ผศ.ดร.ทิพย์รัตน์ อุดเมืองเพีย · บทที่ 1, 3, 4 อยู่ระหว่างจัดทำโดยคณาจารย์ผู้รับผิดชอบ`);
+  v.appendChild(note);
+
+  refreshNavState();
+  window.scrollTo(0,0);
+}
+
+function openChapterFirst(chId){
+  const ch=chById(chId);
+  if(ch.topics&&ch.topics.length) openTopic(COURSE.topics[ch.topics[0]].code);
+}
+
+/* ---------------- LOCKED CHAPTER ---------------- */
+function openLocked(chId){
+  const ch=chById(chId);
+  state.view="locked"; state.topicId=null;
+  $("#crumb").innerHTML=`<b>บทที่ ${ch.num}</b> · ${ch.title}`;
+  const v=$("#view"); v.innerHTML="";
+  const box=el("div","locked-view");
+  box.innerHTML=`
+    <div class="lic">🔒</div>
+    <h2>บทที่ ${ch.num} · ${ch.title}</h2>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--clay);margin-bottom:8px">${ch.en}</div>
+    <p>บทนี้รับผิดชอบโดย <b>${ch.teacher}</b> — เนื้อหาเชิงโต้ตอบและแบบฝึกหัดอยู่ระหว่างจัดทำ ด้านล่างคือโครงสร้างหัวข้อตามประมวลรายวิชา</p>
+    <div style="margin-bottom:18px">${ch.clo.map(c=>`<span class="chip" style="margin:3px">${c}</span>`).join("")}</div>
+  `;
+  const list=el("div","outline-list");
+  (ch.outline||[]).forEach((o,i)=>{
+    const it=el("div","outline-item");
+    it.innerHTML=`<span class="on">${String(i+1).padStart(2,'0')}</span><span class="ot">${o}</span>`;
+    list.appendChild(it);
+  });
+  box.appendChild(list);
+  const back=el("button","btn btn-ghost","← กลับหน้าหลัก"); back.style.marginTop="26px";
+  back.onclick=openHome; box.appendChild(back);
+  v.appendChild(box);
+  refreshNavState();
+  window.scrollTo(0,0);
+}
+
+/* ---------------- TOPIC VIEW ---------------- */
+function openTopic(code){
+  const tp=topicByCode(code);
+  state.view="topic"; state.topicId=code; state.chId=tp.ch; state.phase="before";
+  const ch=chById(tp.ch);
+  $("#crumb").innerHTML=`<b>บทที่ ${ch.num}</b> · ${tp.code} ${tp.title}`;
+
+  const v=$("#view"); v.innerHTML="";
+
+  // head
+  const head=el("div","topic-head");
+  head.innerHTML=`
+    <div class="topic-kicker">หัวข้อ ${tp.code}</div>
+    <h2>${tp.title}</h2>
+    <div class="en-sub">${tp.en}</div>`;
+  v.appendChild(head);
+
+  // roadmap
+  v.appendChild(buildRoadmap(tp));
+
+  // phase tabs
+  const tabs=el("div","phases");
+  const phaseDefs=[
+    {k:"before",th:"ก่อนเรียน",en:"BEFORE"},
+    {k:"during",th:"ระหว่างเรียน",en:"DURING"},
+    {k:"after",th:"หลังเรียน · แบบฝึกหัด",en:"AFTER · QUIZ"}
+  ];
+  phaseDefs.forEach(p=>{
+    const t=el("button","phase-tab");
+    t.dataset.k=p.k;
+    t.innerHTML=`<span>${p.th}</span><span class="ph-en">${p.en}</span>`;
+    t.onclick=()=>switchPhase(p.k);
+    tabs.appendChild(t);
+  });
+  v.appendChild(tabs);
+
+  // panels
+  const pBefore=el("div","phase-panel"); pBefore.dataset.k="before"; renderBefore(pBefore,tp);
+  const pDuring=el("div","phase-panel"); pDuring.dataset.k="during"; renderDuring(pDuring,tp);
+  const pAfter=el("div","phase-panel"); pAfter.dataset.k="after"; renderAfter(pAfter,tp);
+  v.appendChild(pBefore); v.appendChild(pDuring); v.appendChild(pAfter);
+
+  switchPhase("before");
+  refreshNavState();
+  window.scrollTo(0,0);
+}
+
+function buildRoadmap(tp){
+  const labels=["ปัญหา & ตัวแปร","ทบทวนวรรณกรรม","กรอบแนวคิด","ออกแบบ & สุ่ม","เครื่องมือ & เก็บข้อมูล","วิเคราะห์ & จัดการ"];
+  const rm=el("div","roadmap");
+  labels.forEach((l,i)=>{
+    const step=el("div","rm-step"+((i+1)===tp.roadmap?" on":""));
+    step.innerHTML=`<div class="n">${i+1}</div><div class="t">${l}</div>`;
+    rm.appendChild(step);
+    if(i<labels.length-1){ const a=el("span","rm-arrow","›"); rm.appendChild(a); }
+  });
+  return rm;
+}
+
+function switchPhase(k){
+  state.phase=k;
+  document.querySelectorAll(".phase-tab").forEach(t=>t.setAttribute("data-on", t.dataset.k===k?"1":"0"));
+  document.querySelectorAll(".phase-panel").forEach(p=>p.classList.toggle("show", p.dataset.k===k));
+  const tabs=$(".phases"); if(tabs){ const top=tabs.getBoundingClientRect().top; if(top<70) tabs.scrollIntoView({block:"start"}); }
+}
+
+/* ---------------- BEFORE ---------------- */
+function renderBefore(root,tp){
+  const b=tp.before;
+  const obj=el("div","obj-box");
+  obj.innerHTML=`
+    <div class="label">วัตถุประสงค์การเรียนรู้ · Learning Outcomes</div>
+    <h4>เมื่อเรียนหัวข้อนี้จบ คุณจะสามารถ...</h4>
+    <ul class="obj-list">${b.objectives.map(o=>`<li><span class="llo">${o.tag}</span><span>${o.t}</span></li>`).join("")}</ul>
+    <div class="obj-target">🎯 <b>เชื่อมสู่งาน:</b> ${b.target}</div>`;
+  root.appendChild(obj);
+
+  const warm=el("div","warm");
+  warm.innerHTML=`<div class="tag">Activate · กระตุ้นความรู้เดิม</div><h4>ลองคิดก่อนเรียน</h4>`;
+  b.warmups.forEach(w=>{
+    const q=el("div","warm-q");
+    q.innerHTML=`
+      <div class="qrow"><span class="qmark">Q</span><span>${w.q}</span></div>
+      <div class="hint">แตะเพื่อดูแนวคิด ▾</div>
+      <div class="reveal">${w.a}</div>`;
+    q.onclick=()=>q.classList.toggle("open");
+    warm.appendChild(q);
+  });
+  root.appendChild(warm);
+
+  const cta=el("div"); cta.style.cssText="text-align:center;margin-top:8px";
+  const go=el("button","btn btn-primary","เริ่มเรียนเนื้อหา →");
+  go.onclick=()=>switchPhase("during");
+  cta.appendChild(go); root.appendChild(cta);
+}
+
+/* ---------------- DURING ---------------- */
+function renderDuring(root,tp){
+  tp.during.forEach(blk=>{
+    const node=renderBlock(blk);
+    if(node) root.appendChild(node);
+  });
+  const cta=el("div"); cta.style.cssText="text-align:center;margin-top:14px";
+  const go=el("button","btn btn-primary","ทำแบบฝึกหัดทบทวน →");
+  go.onclick=()=>switchPhase("after");
+  cta.appendChild(go); root.appendChild(cta);
+}
+
+function renderBlock(blk){
+  switch(blk.type){
+    case "lead": { return el("p","lead-in",blk.t); }
+    case "concept-grid": {
+      const w=el("div"); if(blk.title) w.appendChild(sectionTitle(blk.title));
+      const g=el("div","cgrid");
+      blk.items.forEach(it=>{
+        const c=el("div","ccard");
+        c.innerHTML=`<div class="ic">${it.ic}</div><h5>${it.h}</h5><div class="en-tag">${it.en}</div><p>${it.p}</p>`;
+        g.appendChild(c);
+      });
+      w.appendChild(g); return w;
+    }
+    case "acro": {
+      const w=el("div"); if(blk.title) w.appendChild(sectionTitle(blk.title));
+      const a=el("div","acro");
+      blk.items.forEach(it=>{
+        const r=el("div","acro-row");
+        r.innerHTML=`<div class="acro-letter">${it.L}</div><div class="acro-body"><h5>${it.h}</h5><p>${it.p}</p></div>`;
+        a.appendChild(r);
+      });
+      w.appendChild(a); return w;
+    }
+    case "callout": {
+      const c=el("div","callout "+(blk.k||"tip"));
+      const ic={tip:"💡",warn:"⚠️",gold:"⭐"}[blk.k||"tip"];
+      c.innerHTML=`<span class="cic">${ic}</span><div>${blk.t}</div>`;
+      return c;
+    }
+    case "table": {
+      const w=el("div"); if(blk.title) w.appendChild(sectionTitle(blk.title));
+      const wrap=el("div","tbl-wrap");
+      const t=el("table","data");
+      t.innerHTML=`<thead><tr>${blk.head.map(h=>`<th>${h}</th>`).join("")}</tr></thead>
+        <tbody>${blk.rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join("")}</tr>`).join("")}</tbody>`;
+      wrap.appendChild(t); w.appendChild(wrap); return w;
+    }
+    case "two-col": {
+      const w=el("div"); if(blk.title) w.appendChild(sectionTitle(blk.title));
+      const g=el("div","cgrid"); g.style.gridTemplateColumns="repeat(auto-fit,minmax(260px,1fr))";
+      blk.cols.forEach(c=>{
+        const card=el("div","card"); card.style.marginBottom="0";
+        card.innerHTML=`<h4 style="font-size:16px">${c.h}</h4><div class="prose"><p>${c.p}</p></div>`;
+        g.appendChild(card);
+      });
+      w.appendChild(g); return w;
+    }
+    case "chain": {
+      const w=el("div"); if(blk.title) w.appendChild(sectionTitle(blk.title));
+      const c=el("div","chain");
+      blk.nodes.forEach((n,i)=>{
+        const node=el("div","chain-node");
+        node.innerHTML=`<div class="lab">${n.lab}</div><p>${n.p}</p>`;
+        c.appendChild(node);
+        if(i<blk.nodes.length-1) c.appendChild(el("div","chain-arrow","↓"));
+      });
+      w.appendChild(c); return w;
+    }
+    case "steps": {
+      const w=el("div"); if(blk.title) w.appendChild(sectionTitle(blk.title));
+      blk.items.forEach(s=>{
+        const card=el("div","card"); card.style.marginBottom="12px";
+        card.innerHTML=`<h4 style="font-size:16px"><span class="ic" style="background:var(--clay-wash);color:var(--clay)">${s.n}</span>${s.h}</h4><div class="prose"><p>${s.p}</p></div>`;
+        w.appendChild(card);
+      });
+      return w;
+    }
+    case "pyramid": {
+      const w=el("div"); if(blk.title) w.appendChild(sectionTitle(blk.title));
+      const p=el("div"); p.style.cssText="display:flex;flex-direction:column;gap:6px;align-items:center;margin-bottom:18px";
+      blk.levels.forEach(lv=>{
+        const bar=el("div");
+        bar.style.cssText=`width:${lv.w}%;background:linear-gradient(135deg,var(--teal-deep),var(--teal));color:#fff;border-radius:10px;padding:11px 16px;text-align:center;box-shadow:var(--shadow);min-width:200px`;
+        bar.innerHTML=`<div style="font-family:'IBM Plex Mono',monospace;font-size:10px;opacity:.8;letter-spacing:.05em">${lv.lv}</div><div style="font-size:13.5px;font-weight:600">${lv.t}</div>`;
+        p.appendChild(bar);
+      });
+      w.appendChild(p);
+      const cap=el("div"); cap.style.cssText="text-align:center;font-size:12px;color:var(--ink-soft);margin:-8px 0 16px";
+      cap.textContent="▲ ความน่าเชื่อถือเชิงสาเหตุสูงขึ้น";
+      w.appendChild(cap);
+      return w;
+    }
+    case "targets": {
+      const w=el("div"); if(blk.title) w.appendChild(sectionTitle(blk.title));
+      const g=el("div","targets");
+      const T=[
+        {h:"ไม่ตรง ไม่เที่ยง",p:"กระจัดกระจาย ไม่เข้าเป้า",pts:[[30,34],[54,28],[42,56],[64,52]]},
+        {h:"เที่ยง แต่ไม่ตรง",p:"เกาะกลุ่ม แต่ผิดเป้า",pts:[[60,30],[64,36],[58,38],[63,33]]},
+        {h:"ตรงและเที่ยง",p:"เกาะกลุ่มกลางเป้า ✓",pts:[[46,46],[50,44],[44,50],[50,50]]}
+      ];
+      T.forEach(t=>{
+        const card=el("div","tg");
+        const dots=t.pts.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="3.4" fill="#c0603a" stroke="#fff" stroke-width="1"/>`).join("");
+        card.innerHTML=`
+          <svg viewBox="0 0 94 94">
+            <circle cx="47" cy="47" r="44" fill="#fff" stroke="#ddd5c7"/>
+            <circle cx="47" cy="47" r="33" fill="#e3efed"/>
+            <circle cx="47" cy="47" r="22" fill="#fff"/>
+            <circle cx="47" cy="47" r="11" fill="#f6e4da"/>
+            <circle cx="47" cy="47" r="3" fill="#c0603a"/>
+            ${dots}
+          </svg>
+          <h5>${t.h}</h5><p>${t.p}</p>`;
+        g.appendChild(card);
+      });
+      w.appendChild(g); return w;
+    }
+    case "framework-demo": {
+      const w=el("div"); w.appendChild(sectionTitle("ตัวอย่างกรอบแนวคิด (อ่านแผนภาพ)"));
+      const card=el("div","card");
+      card.innerHTML=`
+        <svg viewBox="0 0 640 240" style="width:100%;height:auto">
+          <defs><marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#0f6b6b"/></marker></defs>
+          <rect x="20" y="92" width="170" height="58" rx="12" fill="#0a4f4f"/>
+          <text x="105" y="116" text-anchor="middle" fill="#fff" font-size="13" font-family="IBM Plex Sans Thai" font-weight="600">โปรแกรม mHealth</text>
+          <text x="105" y="134" text-anchor="middle" fill="#9fe3d4" font-size="11" font-family="IBM Plex Mono">IV (ตัวแปรต้น)</text>
+          <rect x="450" y="92" width="170" height="58" rx="12" fill="#c0603a"/>
+          <text x="535" y="112" text-anchor="middle" fill="#fff" font-size="12.5" font-family="IBM Plex Sans Thai" font-weight="600">อัตราเลี้ยงลูกด้วย</text>
+          <text x="535" y="128" text-anchor="middle" fill="#fff" font-size="12.5" font-family="IBM Plex Sans Thai" font-weight="600">นมแม่ 6 สัปดาห์</text>
+          <text x="535" y="144" text-anchor="middle" fill="#f6e4da" font-size="11" font-family="IBM Plex Mono">DV (ตัวแปรตาม)</text>
+          <rect x="250" y="20" width="160" height="46" rx="11" fill="#fffdf8" stroke="#c69a3e" stroke-width="1.5"/>
+          <text x="330" y="40" text-anchor="middle" fill="#7a5e1c" font-size="12" font-family="IBM Plex Sans Thai" font-weight="600">สมรรถนะการเลี้ยงลูก</text>
+          <text x="330" y="56" text-anchor="middle" fill="#9a7414" font-size="10.5" font-family="IBM Plex Mono">Mediator</text>
+          <rect x="250" y="176" width="160" height="44" rx="11" fill="#efeae0" stroke="#ddd5c7"/>
+          <text x="330" y="196" text-anchor="middle" fill="#42505c" font-size="11.5" font-family="IBM Plex Sans Thai" font-weight="600">อายุ · การศึกษา · พาริตี้</text>
+          <text x="330" y="211" text-anchor="middle" fill="#65727c" font-size="10.5" font-family="IBM Plex Mono">ควบคุมด้วยการออกแบบ</text>
+          <line x1="190" y1="121" x2="448" y2="121" stroke="#0f6b6b" stroke-width="2.5" marker-end="url(#arr)"/>
+          <line x1="160" y1="92" x2="290" y2="48" stroke="#c69a3e" stroke-width="2" marker-end="url(#arr)"/>
+          <line x1="370" y1="48" x2="500" y2="92" stroke="#c69a3e" stroke-width="2" marker-end="url(#arr)"/>
+          <line x1="330" y1="176" x2="330" y2="135" stroke="#b9b0a0" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#arr)"/>
+        </svg>`;
+      w.appendChild(card); return w;
+    }
+    default: return null;
+  }
+}
+
+function sectionTitle(t){
+  const h=el("h3");
+  h.style.cssText="font-size:19px;font-weight:600;margin:24px 0 14px;color:var(--ink)";
+  h.textContent=t;
+  return h;
+}
+
+/* ---------------- AFTER / QUIZ ---------------- */
+function renderAfter(root,tp){
+  root.innerHTML="";
+  state.quiz={ idx:0, answers:new Array(tp.quiz.length).fill(null), topicId:tp.code };
+
+  const intro=el("div","quiz-intro");
+  intro.innerHTML=`
+    <h4>แบบฝึกหัดทบทวน</h4>
+    <p>แบบฝึกหัดเชิงความเข้าใจ ${tp.quiz.length} ข้อ — เลือกคำตอบแล้วระบบจะเฉลยพร้อมคำอธิบายทันที ไม่นับคะแนนเก็บ ใช้เพื่อตรวจสอบความเข้าใจของตนเอง</p>
+    <button class="btn btn-primary" id="startQuiz">เริ่มทำแบบฝึกหัด</button>`;
+  root.appendChild(intro);
+
+  const host=el("div"); host.id="quizHost"; root.appendChild(host);
+
+  intro.querySelector("#startQuiz").onclick=()=>{ intro.style.display="none"; renderQ(host,tp); };
+}
+
+function renderQ(host,tp){
+  const i=state.quiz.idx;
+  const q=tp.quiz[i];
+  host.innerHTML="";
+  const card=el("div","q-card");
+  card.innerHTML=`
+    <div class="q-top">
+      <span class="q-count">ข้อ ${i+1} / ${tp.quiz.length}</span>
+      <span class="q-tag">${q.tag}</span>
+    </div>
+    <div class="q-stem">${q.stem}</div>`;
+  const optWrap=el("div");
+  const letters=["ก","ข","ค","ง","จ"];
+  q.opts.forEach((o,oi)=>{
+    const btn=el("button","opt");
+    btn.innerHTML=`<span class="olbl">${letters[oi]}.</span>${o}<span class="mark"></span>`;
+    btn.onclick=()=>chooseOpt(host,tp,oi,btn,optWrap);
+    optWrap.appendChild(btn);
+  });
+  card.appendChild(optWrap);
+
+  const ex=el("div","explain"); ex.id="exBox"; card.appendChild(ex);
+
+  const nav=el("div","q-nav");
+  const prev=el("button","btn btn-ghost","← ข้อก่อน");
+  prev.disabled = i===0;
+  prev.onclick=()=>{ state.quiz.idx--; renderQ(host,tp); };
+  const next=el("button","btn btn-primary", i===tp.quiz.length-1?"ดูผลสรุป →":"ข้อถัดไป →");
+  next.id="nextBtn"; next.disabled = state.quiz.answers[i]===null;
+  next.onclick=()=>{
+    if(i===tp.quiz.length-1) showResult(host,tp);
+    else { state.quiz.idx++; renderQ(host,tp); }
+  };
+  nav.appendChild(prev); nav.appendChild(next);
+  card.appendChild(nav);
+  host.appendChild(card);
+
+  // restore previous answer
+  if(state.quiz.answers[i]!==null){
+    replayAnswer(tp,i,optWrap);
+  }
+}
+
+function chooseOpt(host,tp,choice,btn,optWrap){
+  const i=state.quiz.idx;
+  if(state.quiz.answers[i]!==null) return; // locked after answering
+  state.quiz.answers[i]=choice;
+  revealAnswer(tp,i,optWrap);
+  $("#nextBtn").disabled=false;
+}
+
+function revealAnswer(tp,i,optWrap){
+  const q=tp.quiz[i];
+  const choice=state.quiz.answers[i];
+  const opts=[...optWrap.querySelectorAll(".opt")];
+  opts.forEach((b,oi)=>{
+    b.disabled=true;
+    if(oi===q.correct){ b.classList.add("correct"); b.querySelector(".mark").textContent="✓"; }
+    if(oi===choice && choice!==q.correct){ b.classList.add("wrong"); b.querySelector(".mark").textContent="✕"; }
+  });
+  const ex=$("#exBox");
+  const correct = choice===q.correct;
+  ex.className="explain show "+(correct?"right":"miss");
+  ex.innerHTML=`
+    <div class="etag">${correct?"✓ ถูกต้อง":"ลองทบทวนอีกครั้ง"}</div>
+    <div>${correct? q.ex.right : q.ex.miss}</div>
+    <span class="lloref">อ้างอิง: ${q.llo}</span>`;
+}
+
+function replayAnswer(tp,i,optWrap){ revealAnswer(tp,i,optWrap); }
+
+function showResult(host,tp){
+  const total=tp.quiz.length;
+  let correct=0;
+  state.quiz.answers.forEach((a,i)=>{ if(a===tp.quiz[i].correct) correct++; });
+  const pct=Math.round(correct/total*100);
+  state.done[tp.code]=true;
+  updateProgress(); refreshNavState();
+
+  host.innerHTML="";
+  const r=el("div","result");
+  const circ=2*Math.PI*54;
+  const off=circ*(1-correct/total);
+  r.innerHTML=`
+    <svg class="score-ring" viewBox="0 0 130 130">
+      <circle cx="65" cy="65" r="54" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="11"/>
+      <circle cx="65" cy="65" r="54" fill="none" stroke="#fff" stroke-width="11" stroke-linecap="round"
+        stroke-dasharray="${circ}" stroke-dashoffset="${off}" transform="rotate(-90 65 65)"/>
+      <text x="65" y="60" text-anchor="middle" fill="#fff" font-size="30" font-family="Fraunces" font-weight="700">${pct}%</text>
+      <text x="65" y="82" text-anchor="middle" fill="#cdeee6" font-size="13" font-family="IBM Plex Sans Thai">${correct}/${total} ข้อ</text>
+    </svg>
+    <h3>${pct>=80?"ยอดเยี่ยม! เข้าใจดีมาก":pct>=60?"ดีแล้ว! ทบทวนอีกนิด":"ลองทบทวนเนื้อหาอีกครั้งนะ"}</h3>
+    <p>${pct>=80?"คุณเข้าใจหัวข้อนี้อย่างมั่นคง พร้อมนำไปใช้ในโครงร่างการวิจัยแล้ว":pct>=60?"พื้นฐานแน่นแล้ว ลองกลับไปอ่านข้อที่ตอบผิดเพื่อความเข้าใจที่สมบูรณ์":"แนะนำให้กลับไปทบทวนเนื้อหาในระยะ “ระหว่างเรียน” แล้วลองทำแบบฝึกหัดอีกครั้ง"}</p>
+    <div class="breakdown">
+      <div class="bd"><b>${correct}</b>ตอบถูก</div>
+      <div class="bd"><b>${total-correct}</b>ตอบผิด</div>
+      <div class="bd"><b>${total}</b>ทั้งหมด</div>
+    </div>`;
+  host.appendChild(r);
+
+  const acts=el("div"); acts.style.cssText="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:8px";
+  const retry=el("button","btn btn-ghost","↻ ทำแบบฝึกหัดอีกครั้ง");
+  retry.onclick=()=>{ renderAfter($('.phase-panel[data-k="after"]'),tp); switchPhase("after"); };
+  acts.appendChild(retry);
+
+  const nextTopic=getNextTopic(tp.code);
+  if(nextTopic){
+    const nx=el("button","btn btn-primary",`ไปหัวข้อถัดไป: ${nextTopic.code} →`);
+    nx.onclick=()=>openTopic(nextTopic.code);
+    acts.appendChild(nx);
+  } else {
+    const hm=el("button","btn btn-primary","กลับหน้าหลัก →");
+    hm.onclick=openHome; acts.appendChild(hm);
+  }
+  host.appendChild(acts);
+
+  // assignment bridge
+  const br=el("div","bridge");
+  br.innerHTML=`
+    <div class="tag">เชื่อมสู่งานมอบหมาย · รายงานฉบับที่ 3</div>
+    <h4>นำไปใช้ในโครงร่างการวิจัยของคุณ</h4>
+    <ul>
+      <li><span class="ck">✓</span><span>${tp.before.target}</span></li>
+      <li><span class="ck">✓</span><span>ตรวจสอบว่าส่วนนี้ในโครงร่างของคุณสอดคล้องกับ ${tp.llo.join(", ")} หรือยัง</span></li>
+    </ul>`;
+  host.appendChild(br);
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function getNextTopic(code){
+  const ch=chById(topicByCode(code).ch);
+  const order=ch.topics;
+  const idx=order.indexOf(code);
+  if(idx>=0 && idx<order.length-1) return COURSE.topics[order[idx+1]];
+  return null;
+}
+
+/* ---------------- MOBILE ---------------- */
+function closeMobile(){ $("#rail").classList.remove("open"); $("#scrim").classList.remove("show"); }
+$("#menuBtn").onclick=()=>{ $("#rail").classList.toggle("open"); $("#scrim").classList.toggle("show"); };
+$("#scrim").onclick=closeMobile;
+$("#homeBtn").onclick=openHome;
+
+/* ---------------- INIT ---------------- */
+buildNav();
+updateProgress();
+openHome();
+
+</script>
+</body>
+</html>
